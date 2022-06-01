@@ -51,6 +51,13 @@ public class GerenciadorUsuarios {
 	 * substituição
 	 */
 	private static void editar(Usuario usuarioEdit, Usuario alterarUsuario) {
+		
+		listaUsuarios.set(listaUsuarios.indexOf(usuarioEdit),alterarUsuario);
+		
+		/*listaUsuarios.add(alterarUsuario);
+		listaUsuarios.remove(usuarioEdit);
+		System.out.println(usuarioEdit.getCargo());
+		System.out.println(alterarUsuario.getCargo());
 		//Se o login for diferente será trocado
 		if (usuarioEdit.getLogin() != alterarUsuario.getLogin()){
 			usuarioEdit.setLogin(alterarUsuario.getLogin());
@@ -63,6 +70,17 @@ public class GerenciadorUsuarios {
 		if(usuarioEdit.getNome() != alterarUsuario.getNome()) {
 			usuarioEdit.setNome(alterarUsuario.getNome());
 		}
+		if(alterarUsuario.getCargo()!=usuarioEdit.getCargo()) { 
+			
+			System.out.println("Entrou primeiro if");
+		
+			if(alterarUsuario.getCargo().equals("Funcionario")) {
+				System.out.println("Entrou segundo if");
+				usuarioEdit=(Funcionario) usuarioEdit;
+			}else {
+				usuarioEdit = (Gerente) usuarioEdit;
+			}
+		}*/
 	}	
 	
 	/**
@@ -98,6 +116,11 @@ public class GerenciadorUsuarios {
 		}
 	}
 	
+	
+	public static void remover(Usuario usuario) {
+		listaUsuarios.remove(usuario);
+	}
+	
 	/**
 	 * Metódo para pegar a lista completa dos usuários
 	 * @return Lista de Usuários - Lista dos usuários cadastrados
@@ -117,6 +140,20 @@ public class GerenciadorUsuarios {
 		Usuario usuario =GerenciadorUsuarios.listaUsuarios.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
 		return usuario;
 	}
+	
+	
+	
+	public static List<Usuario> buscar(String nome){
+		List<Usuario> list = new ArrayList<>();
+		for(Usuario u: listaUsuarios) {
+			if(u.getNome().equals(nome)) {
+				list.add(u);
+			}
+		}
+		
+		return list;
+	}
+	
 	
 	/**
 	 * Metódo para fazer a listagem dos usuários

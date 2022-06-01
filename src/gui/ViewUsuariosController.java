@@ -4,20 +4,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
-
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -31,6 +30,7 @@ import model.entities.Funcionario;
 import model.entities.Gerente;
 import model.entities.Usuario;
 import model.gerenciadores.GerenciadorUsuarios;
+import model.utils.Alerts;
 
 public class ViewUsuariosController implements Initializable{
 	
@@ -46,7 +46,7 @@ public class ViewUsuariosController implements Initializable{
 	private Button buscar;
 	
 	@FXML
-	private TextField campoBusca;
+	private TextField campoBusca;	
 	
 	@FXML 
 	private RadioButton radioCodigo;
@@ -75,7 +75,8 @@ public class ViewUsuariosController implements Initializable{
 	
 	@FXML
 	private TableColumn<Usuario,Usuario> tableColumnEDIT;
-	
+	@FXML
+	private TableColumn<Usuario,Usuario> tableColumnExcluir;
 
 
 	@Override
@@ -87,6 +88,66 @@ public class ViewUsuariosController implements Initializable{
 	
 		updateData();
 		initInfoButtons();
+		initExcluirButtons();
+		radioCodigo.setSelected(true);
+		radioNome.setSelected(false);
+		
+		
+	}
+	
+	public void onRadioSelectedCodigo() {
+		if(radioCodigo.isSelected()) {
+			radioNome.setSelected(false);
+			
+
+		}else {
+			radioNome.setSelected(true);
+			
+			
+		}
+	}
+	
+	public void onRadioSelectedCNome() {	
+		if(radioNome.isSelected()) {
+			radioCodigo.setSelected(false);	
+			
+		}
+		else {
+			radioCodigo.setSelected(true);
+			
+		}
+	}
+	
+	public void onBtBuscar() {
+		List<Usuario> list = new ArrayList<>();
+		if(radioCodigo.isSelected()) {
+			if(campoBusca.getText()!="") {
+				try {
+					Integer id = Integer.parseInt(campoBusca.getText());
+					list.add(GerenciadorUsuarios.getUsuario(id));
+					updateData(list);
+				}catch(Exception e) {
+					Alerts.showAlert("Dado inválido", "Dado inválido!","O id só pode ser um número inteiro" , AlertType.ERROR);
+				}
+			
+			}
+			else {
+				updateData();
+			}
+		}else {
+			System.out.print("Entrou ca");
+			if(campoBusca.getText()!=null) {
+				System.out.println(campoBusca.getText()+"oiii");
+				String nome = campoBusca.getText();
+				list = GerenciadorUsuarios.buscar(nome);
+				System.out.println(list.size());
+				updateData(list);
+				
+			}
+			else {
+				updateData();
+			}
+		}
 	}
 		
 	public void updateData() {	
@@ -98,8 +159,17 @@ public class ViewUsuariosController implements Initializable{
 		
 	}
 	
+	public void updateData(List<Usuario> usuario) {	
+		tableViewPessoa.refresh();
+		List<Usuario> list = new ArrayList<>();
+		list.addAll(usuario);
+		obsList = FXCollections.observableArrayList(list);
+		tableViewPessoa.setItems(obsList);	
+		
+	}
+	
 
-	 public void onBtAdicionarAction(ActionEvent event) throws IOException {
+	 public void onBtAdicionarAction() throws IOException {
 		 	UsuariosFormController.setUsuario(null);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/UsuariosFormView.fxml"));
 			Pane pane = loader.load();	
@@ -119,8 +189,11 @@ public class ViewUsuariosController implements Initializable{
 		tableColumnLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
 		tableColumnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
 	}
+	
 	private void mudarTelaEditar(ActionEvent event,Usuario usuario) throws IOException {
-		  UsuariosFormController.setUsuario(usuario);	
+			System.out.print(usuario.getCargo());
+		
+		  	UsuariosFormController.setUsuario(usuario);	
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/UsuariosFormView.fxml"));
 			Pane pane = loader.load();	
 
@@ -133,6 +206,15 @@ public class ViewUsuariosController implements Initializable{
 			updateData();
 			
 			
+	}
+	
+	private void onBtExcluir(ActionEvent event, Usuario usuario) {
+		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente excluir usuário?");
+		
+		if(opcao.get()==ButtonType.OK) {
+			GerenciadorUsuarios.remover(usuario);
+		}
+		updateData();
 	}
 	private void initInfoButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
@@ -155,7 +237,30 @@ public class ViewUsuariosController implements Initializable{
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-							}
+							}});
+				
+			}
+			
+		});
+		
+	}
+	
+	private void initExcluirButtons() {
+		tableColumnExcluir.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnExcluir.setCellFactory(param -> new TableCell<Usuario, Usuario>() {
+			private final Button button = new Button("Excluir");
+
+			@Override
+			protected void updateItem(Usuario obj, boolean empty) {
+				super.updateItem(obj, empty);
+				if (obj == null) {
+					setGraphic(null);
+					return;
+				}
+				setGraphic(button);
+				button.setOnAction(
+						event -> {
+							onBtExcluir(event, obj);
 						});
 				
 			}

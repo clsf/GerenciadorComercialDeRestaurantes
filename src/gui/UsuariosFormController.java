@@ -8,13 +8,8 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -53,9 +48,7 @@ public class UsuariosFormController implements Initializable{
 	@FXML
 	private ObservableList<String> obsList;
 	
-	 private Stage stage;
-	 private Scene scene;
-	 private Parent root;
+
 	
 
 	 
@@ -76,21 +69,29 @@ public class UsuariosFormController implements Initializable{
 		
 	}
 	
-	public void onBtSalvar(ActionEvent event) {
+	public void onBtSalvar() {
 		if(usuario!=null) {
 			if(comboCargo.getValue().equals("Gerente")) {
-				GerenciadorUsuarios.addOuEdit(new Gerente(Integer.valueOf(textCodigo.getText()),textLogin.getText(),textSenha.getText(),textNome.getText()));
+				System.out.println("Instanciou como gerente");
+				Usuario uEdit = new Gerente(Integer.valueOf(textCodigo.getText()),textLogin.getText(),textSenha.getText(),textNome.getText());
+				GerenciadorUsuarios.addOuEdit(uEdit);
 				
 			}else {
+				System.out.println("Instanciou como funcionário");
+				Usuario uEdit = new Funcionario(Integer.valueOf(textCodigo.getText()),textLogin.getText(),textSenha.getText(),textNome.getText());
+				GerenciadorUsuarios.addOuEdit(uEdit);
+				
 				GerenciadorUsuarios.addOuEdit(new Funcionario(Integer.valueOf(textCodigo.getText()),textLogin.getText(),textSenha.getText(),textNome.getText()));
-	
+				System.out.println(usuario.getClass().getSimpleName());
 			}}
 		else {
 			if(comboCargo.getValue().equals("Gerente")) {
-				GerenciadorUsuarios.addOuEdit(new Gerente(textLogin.getText(),textSenha.getText(),textNome.getText()));
+				usuario = new Gerente(textLogin.getText(),textSenha.getText(),textNome.getText());
+				GerenciadorUsuarios.addOuEdit(usuario);
 				
 			}else {
-				GerenciadorUsuarios.addOuEdit(new Funcionario(textLogin.getText(),textSenha.getText(),textNome.getText()));
+				usuario = new Funcionario(textLogin.getText(),textSenha.getText(),textNome.getText());
+				GerenciadorUsuarios.addOuEdit(usuario);
 	
 			}
 		}
@@ -101,7 +102,7 @@ public class UsuariosFormController implements Initializable{
 		
 	}
 	
-	public void onBtCancelar(ActionEvent event) throws IOException {
+	public void onBtCancelar() throws IOException {
 	    Stage stage = (Stage) cancelar.getScene().getWindow(); //Obtendo a janela atual
 	    stage.close(); //Fechando o Stage
 	}

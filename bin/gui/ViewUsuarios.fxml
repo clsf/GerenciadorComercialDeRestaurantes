@@ -24,7 +24,8 @@
           <TableColumn fx:id="tableColumnNome" prefWidth="231.0" text="Nome" />
             <TableColumn fx:id="tableColumnLogin" minWidth="0.0" prefWidth="95.0" text="Login" />
             <TableColumn fx:id="tableColumnCargo" prefWidth="110.0" text="Cargo" />
-            <TableColumn fx:id="tableColumnEDIT" prefWidth="100.0" text="Info" />
+            <TableColumn fx:id="tableColumnEDIT" prefWidth="51.0" text="Edit" />
+            <TableColumn fx:id="tableColumnExcluir" prefWidth="49.0" text="Excluir" />
         </columns>
       </TableView>
       <HBox layoutX="6.0" layoutY="340.0" prefHeight="45.0" prefWidth="585.0" spacing="400.0">
@@ -44,14 +45,14 @@
       <AnchorPane layoutX="13.0" layoutY="48.0" prefHeight="45.0" prefWidth="566.0">
          <children>
             <TextField fx:id="campoBusca" layoutX="8.0" layoutY="10.0" prefHeight="25.0" prefWidth="274.0" promptText="Pesquisar" />
-            <Button fx:id="buscar" layoutX="231.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Buscar" />
-            <Label layoutX="292.0" layoutY="15.0" text="Pesquisar por:">
+            <Label fx:id="campoBuscaNome" layoutX="292.0" layoutY="15.0" text="Pesquisar por:">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
             </Label>
-            <RadioButton fx:id="radioCodigo" layoutX="388.0" layoutY="14.0" mnemonicParsing="false" text="Código" />
-            <RadioButton fx:id="radioNome" layoutX="472.0" layoutY="14.0" mnemonicParsing="false" text="Nome" />
+            <RadioButton fx:id="radioCodigo" layoutX="388.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRadioSelectedCodigo" text="Código" />
+            <RadioButton fx:id="radioNome" layoutX="472.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRadioSelectedCNome" text="Nome" />
+            <Button fx:id="buscar" layoutX="230.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBtBuscar" prefHeight="25.0" prefWidth="52.0" text="Buscar" />
          </children>
       </AnchorPane>
    </children>
