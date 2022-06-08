@@ -11,26 +11,26 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UsuariosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ProdutosController">
    <children>
-      <Label layoutX="13.0" layoutY="3.0" prefHeight="45.0" prefWidth="140.0" text="Usuários">
+      <Label layoutX="13.0" layoutY="3.0" prefHeight="45.0" prefWidth="140.0" text="Produtos">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="tableViewUsuario" layoutX="7.0" layoutY="98.0" prefHeight="237.0" prefWidth="585.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="98.0">
-        <columns>
-          <TableColumn fx:id="tableColumnCodigo" prefWidth="48.0" text="Código" />
-          <TableColumn fx:id="tableColumnNome" prefWidth="231.0" text="Nome" />
-            <TableColumn fx:id="tableColumnLogin" minWidth="0.0" prefWidth="95.0" text="Login" />
-            <TableColumn fx:id="tableColumnCargo" prefWidth="110.0" text="Cargo" />
+      <TableView fx:id="tableViewProduto" layoutX="7.0" layoutY="98.0" prefHeight="237.0" prefWidth="585.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="98.0">
+         <columns>
+            <TableColumn fx:id="tableColumnCodigo" prefWidth="48.0" text="Código" />
+            <TableColumn fx:id="tableColumnNome" prefWidth="194.0" text="Nome" />
+            <TableColumn fx:id="tableColumnValidade" minWidth="0.0" prefWidth="132.0" text="Validade" />
+            <TableColumn fx:id="tableColumnQuantidade" prefWidth="110.0" text="Quantidade" />
             <TableColumn fx:id="tableColumnEDIT" prefWidth="51.0" text="Edit" />
             <TableColumn fx:id="tableColumnExcluir" prefWidth="49.0" text="Excluir" />
-        </columns>
+         </columns>
       </TableView>
       <HBox layoutX="6.0" layoutY="340.0" prefHeight="45.0" prefWidth="585.0" spacing="400.0">
          <children>
-            <Button fx:id="voltar" mnemonicParsing="false" onAction="#onBtVoltar" prefHeight="25.0" prefWidth="180.0" text="Voltar">
+            <Button fx:id="voltar" mnemonicParsing="false" onAction="#onBtVoltar" prefHeight="25.0" prefWidth="190.0" text="Voltar">
                <HBox.margin>
                   <Insets left="15.0" top="10.0" />
                </HBox.margin>

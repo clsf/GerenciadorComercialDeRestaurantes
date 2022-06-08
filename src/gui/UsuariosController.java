@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -32,9 +34,9 @@ import model.entities.Usuario;
 import model.gerenciadores.GerenciadorUsuarios;
 import model.utils.Alerts;
 
-public class ViewUsuariosController implements Initializable{
+public class UsuariosController implements Initializable{
 	
-
+	public static Integer count=0;
 	
 	@FXML
 	private Button voltar;
@@ -57,7 +59,7 @@ public class ViewUsuariosController implements Initializable{
 	
 	
 	@FXML
-	private TableView<Usuario> tableViewPessoa;
+	private TableView<Usuario> tableViewUsuario;
 	
 	
 	@FXML
@@ -78,13 +80,20 @@ public class ViewUsuariosController implements Initializable{
 	@FXML
 	private TableColumn<Usuario,Usuario> tableColumnExcluir;
 
+	
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initalizeNode();
 		
-		GerenciadorUsuarios.addOuEdit(new Gerente("nome","senha","login"));
-		GerenciadorUsuarios.addOuEdit(new Funcionario("nome2","senha2","login2"));
+		if(count==0) {
+			GerenciadorUsuarios.addOuEdit(new Gerente("nome","senha","login"));
+			GerenciadorUsuarios.addOuEdit(new Funcionario("nome2","senha2","login2"));
+			count=1;
+		}
 	
 		updateData();
 		initInfoButtons();
@@ -135,7 +144,6 @@ public class ViewUsuariosController implements Initializable{
 				updateData();
 			}
 		}else {
-			System.out.print("Entrou ca");
 			if(campoBusca.getText()!=null) {
 				System.out.println(campoBusca.getText()+"oiii");
 				String nome = campoBusca.getText();
@@ -150,21 +158,21 @@ public class ViewUsuariosController implements Initializable{
 		}
 	}
 		
-	public void updateData() {	
-		tableViewPessoa.refresh();
+	public void updateData() {
+		tableViewUsuario.refresh();
 		List<Usuario> list = new ArrayList<>();
 		list.addAll(GerenciadorUsuarios.getListaDeUsuarios());
 		obsList = FXCollections.observableArrayList(list);
-		tableViewPessoa.setItems(obsList);	
+		tableViewUsuario.setItems(obsList);	
 		
 	}
 	
 	public void updateData(List<Usuario> usuario) {	
-		tableViewPessoa.refresh();
+		tableViewUsuario.refresh();
 		List<Usuario> list = new ArrayList<>();
 		list.addAll(usuario);
 		obsList = FXCollections.observableArrayList(list);
-		tableViewPessoa.setItems(obsList);	
+		tableViewUsuario.setItems(obsList);	
 		
 	}
 	
@@ -191,8 +199,7 @@ public class ViewUsuariosController implements Initializable{
 	}
 	
 	private void mudarTelaEditar(ActionEvent event,Usuario usuario) throws IOException {
-			System.out.print(usuario.getCargo());
-		
+	
 		  	UsuariosFormController.setUsuario(usuario);	
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/UsuariosFormView.fxml"));
 			Pane pane = loader.load();	
@@ -216,6 +223,15 @@ public class ViewUsuariosController implements Initializable{
 		}
 		updateData();
 	}
+	
+	public void onBtVoltar(ActionEvent event) throws IOException {
+		  root = FXMLLoader.load(getClass().getResource("/gui/MenuView.fxml"));
+		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+	}
+	
 	private void initInfoButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDIT.setCellFactory(param -> new TableCell<Usuario, Usuario>() {
@@ -231,8 +247,7 @@ public class ViewUsuariosController implements Initializable{
 				setGraphic(button);
 				button.setOnAction(
 						event -> {
-							try {
-								System.out.print(obj.getNome());
+							try {								
 								mudarTelaEditar(event,obj);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block

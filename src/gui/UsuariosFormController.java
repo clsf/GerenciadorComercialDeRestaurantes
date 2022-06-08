@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,6 +20,7 @@ import model.entities.Funcionario;
 import model.entities.Gerente;
 import model.entities.Usuario;
 import model.gerenciadores.GerenciadorUsuarios;
+import model.utils.Alerts;
 
 public class UsuariosFormController implements Initializable{
 
@@ -55,7 +58,6 @@ public class UsuariosFormController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(usuario==null) {
-			System.out.print(Usuario.getUltimoId());
 			textCodigo.setText(String.valueOf(Usuario.getUltimoId()));
 		}else {
 			textCodigo.setText(String.format("%d",usuario.getId()));
@@ -72,12 +74,10 @@ public class UsuariosFormController implements Initializable{
 	public void onBtSalvar() {
 		if(usuario!=null) {
 			if(comboCargo.getValue().equals("Gerente")) {
-				System.out.println("Instanciou como gerente");
 				Usuario uEdit = new Gerente(Integer.valueOf(textCodigo.getText()),textLogin.getText(),textSenha.getText(),textNome.getText());
 				GerenciadorUsuarios.addOuEdit(uEdit);
 				
 			}else {
-				System.out.println("Instanciou como funcionário");
 				Usuario uEdit = new Funcionario(Integer.valueOf(textCodigo.getText()),textLogin.getText(),textSenha.getText(),textNome.getText());
 				GerenciadorUsuarios.addOuEdit(uEdit);
 				
@@ -95,7 +95,6 @@ public class UsuariosFormController implements Initializable{
 	
 			}
 		}
-		System.out.print(Usuario.getUltimoId());
 		
 	    Stage stage = (Stage) salvar.getScene().getWindow(); //Obtendo a janela atual
 	    stage.close(); //Fechando o Stage
@@ -103,8 +102,14 @@ public class UsuariosFormController implements Initializable{
 	}
 	
 	public void onBtCancelar() throws IOException {
-	    Stage stage = (Stage) cancelar.getScene().getWindow(); //Obtendo a janela atual
-	    stage.close(); //Fechando o Stage
+		
+		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Cancelar?");
+		
+		if(opcao.get()==ButtonType.OK) {
+			Stage stage = (Stage) cancelar.getScene().getWindow(); //Obtendo a janela atual
+		    stage.close(); //Fechando o Stage
+		}
+	    
 	}
 	
 	public void initalizeComb() {
