@@ -47,7 +47,7 @@
                   <Insets left="60.0" />
                </GridPane.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" text="Cardápio" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="btCardapio" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBtCardapio" prefHeight="59.0" prefWidth="175.0" text="Cardápio" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="60.0" />
                </GridPane.margin>

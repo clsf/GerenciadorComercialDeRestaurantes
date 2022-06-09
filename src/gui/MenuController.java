@@ -25,6 +25,8 @@ public class MenuController {
 	@FXML
 	private Button btFornecedores;
 	
+	@FXML
+	private Button btCardapio;
 	
 	private Stage stage;
 	 private Scene scene;
@@ -67,5 +69,13 @@ public class MenuController {
 		  stage.show();
 	 }
 	 
+	 public void onBtCardapio(ActionEvent event) throws IOException {
+		 
+		  root = FXMLLoader.load(getClass().getResource("/gui/PratosView.fxml"));
+		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+	 }
 
 }

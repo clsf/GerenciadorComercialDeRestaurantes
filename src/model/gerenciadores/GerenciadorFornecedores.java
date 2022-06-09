@@ -48,7 +48,8 @@ public class GerenciadorFornecedores {
 	 */
 	
 	private static void editar(Fornecedor fornecedorEdit,Fornecedor alterarFornecedor) {
-		//Troca o CNPJ do fornecedor se for diferente
+		listaFornecedores.set(listaFornecedores.indexOf(fornecedorEdit),alterarFornecedor);
+		/*//Troca o CNPJ do fornecedor se for diferente
 		if (fornecedorEdit.getCnpj() != alterarFornecedor.getCnpj()) {
 			fornecedorEdit.setCnpj(alterarFornecedor.getCnpj());
 		}
@@ -63,7 +64,7 @@ public class GerenciadorFornecedores {
 		//Troca a lista de ID's de produtos fornecidos caso sejam diferentes
 		if(fornecedorEdit.getIdProdutosFornecidos() != alterarFornecedor.getIdProdutosFornecidos()) {
 			fornecedorEdit.setProdutosFornecidos(alterarFornecedor.getIdProdutosFornecidos());
-		}
+		}*/
 	}
 	
 	/**
