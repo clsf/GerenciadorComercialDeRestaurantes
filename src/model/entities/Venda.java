@@ -11,6 +11,7 @@ do código, e estou ciente que estes trechos não serão considerados para fins de 
 package model.entities;
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import model.gerenciadores.GerenciadorPratos;
  *
  */
 public class Venda {
+	SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 	private static Integer ultimoId=1; // Salva o último ID utilizado, atributo pertencente a classe
 	private Integer id;   			   // Id da Venda
 	private FormaDePagamento formaDePagamento; // Forma de pagamento podendo ser Débito, a vista, 
@@ -59,7 +61,7 @@ public class Venda {
 	 * @param itens Lista com ID's de pratos que fazem parte da venda
 	 */
 
-	public Venda(Integer id,  FormaDePagamento formaDePagamento, Date data, 
+	public Venda(Integer id,  FormaDePagamento formaDePagamento, Date data, StatusDaVenda status,
 			List<Integer> itens) {
 		this.id = id;
 		this.formaDePagamento = formaDePagamento;
@@ -68,16 +70,26 @@ public class Venda {
 	}
 	
 	
+	public Venda(Integer id,  FormaDePagamento formaDePagamento, Date data, StatusDaVenda status,
+			List<Integer> itens, Cliente cliente) {
+		this.id = id;
+		this.formaDePagamento = formaDePagamento;
+		this.data = data;
+		this.itens = itens;
+		this.cliente = cliente;
+	}
 	
 
 	public Venda(FormaDePagamento formaDePagamento, Date data, List<Integer> itens, StatusDaVenda status,
 			Cliente cliente) {
-		super();
+		this.id = ultimoId;
 		this.formaDePagamento = formaDePagamento;
 		this.data = data;
 		this.itens = itens;
 		this.status = status;
 		this.cliente = cliente;
+		ultimoId++;
+		
 	}
 
 	/**
@@ -102,9 +114,11 @@ public class Venda {
 	 * @return Data - Data da venda
 	 */
 
-	public Date getData() {
-		return data;
+	public String getData() {
+		return sdf1.format(data);
 	}
+	
+
 	
 	/**
 	 * Metódo para configurar data da venda
@@ -138,7 +152,9 @@ public class Venda {
 		this.itens=itens;
 	}
 	
-
+	public void addItens(Integer item) {
+		itens.add(item);
+	}
 	
 	/**
 	 * Metódo para calcular o preço total da venda 
@@ -239,6 +255,9 @@ public class Venda {
 		return cliente;
 	}
 
+	public String getNomeCliente() {
+		return cliente.getNome();
+	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
@@ -250,6 +269,10 @@ public class Venda {
 				itens.remove(prato);
 			}
 		}
+	}
+	
+	public Double getPreco() {
+		return precoTotal(GerenciadorPratos.getPrato());
 	}
 	
 	

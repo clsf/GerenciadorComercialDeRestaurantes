@@ -53,7 +53,8 @@ public class GerenciadorVendas {
 	 * @param alterarVenda Objeto venda que será usado como parâmetro para editar o original
 	 */
 	private static void editar(Venda vendaEdit, Venda alterarVenda) {
-			//Se a data estiver diferente será trocada
+		listaDeVendas.set(listaDeVendas.indexOf(vendaEdit),alterarVenda);
+		/*	//Se a data estiver diferente será trocada
 			if(vendaEdit.getData() != alterarVenda.getData()) {
 				vendaEdit.setData(alterarVenda.getData());
 			}
@@ -64,7 +65,7 @@ public class GerenciadorVendas {
 			//Se a lista de itens for diferente será trocada
 			if(vendaEdit.getItens() != alterarVenda.getItens()) {
 				vendaEdit.setItens(alterarVenda.getItens());
-			}
+			}*/
 	}
 	/**
 	 * Metódo que será utilizado por outras classes para adicionar ou editar uma venda

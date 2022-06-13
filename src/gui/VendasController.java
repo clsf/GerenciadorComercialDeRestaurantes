@@ -27,6 +27,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Cliente;
 import model.entities.Venda;
@@ -95,7 +97,14 @@ public class VendasController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		initalizeNode();
+		
+		initInfoButtons();
+		initExcluirButtons();
+		radioCodigo.setSelected(true);
+		radioNome.setSelected(false);
+		
+		updateData();
 		
 	}
 	
@@ -171,8 +180,8 @@ public class VendasController implements Initializable {
 	}
 	
 	 public void onBtAdicionarAction() throws IOException {
-		 /*	FornecedoresFormController.setFornecedor(null);
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FornecedoresFormView.fxml"));
+		 	VendasFormController.setVenda(null);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/VendasFormView.fxml"));
 			Pane pane = loader.load();	
 
 			Stage dialogStage = new Stage();			
@@ -181,21 +190,21 @@ public class VendasController implements Initializable {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.showAndWait();
 			
-			updateData();*/
+			updateData();
 	 }
 	 
 		public void initalizeNode() {
 			tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
 			tableColumnData.setCellValueFactory(new PropertyValueFactory<>("data"));
 			tableColumnPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
-			tableColumnPagamento.setCellValueFactory(new PropertyValueFactory<>("pagamento"));
-			tableColumnCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
-			tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
+			tableColumnPagamento.setCellValueFactory(new PropertyValueFactory<>("formaDePagamento"));
+			tableColumnCliente.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
+			tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 		}
 		
 		private void mudarTelaEditar(ActionEvent event,Venda venda) throws IOException {
-		  /*	FornecedoresFormController.setFornecedor(fornecedor);	
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FornecedoresFormView.fxml"));
+			VendasFormController.setVenda(venda);	
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/VendasFormView.fxml"));
 			Pane pane = loader.load();	
 
 			Stage dialogStage = new Stage();			
@@ -206,7 +215,7 @@ public class VendasController implements Initializable {
 
 			updateData();
 			
-			*/
+			
 		}
 		
 		private void onBtExcluir(ActionEvent event, Venda venda) {
