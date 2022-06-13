@@ -42,7 +42,7 @@
                   <Insets left="60.0" />
                </GridPane.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="175.0" text="Vendas" GridPane.rowIndex="2">
+            <Button fx:id="btVendas" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBtVenda" prefHeight="59.0" prefWidth="175.0" text="Vendas" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="60.0" />
                </GridPane.margin>

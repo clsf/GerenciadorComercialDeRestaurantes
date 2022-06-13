@@ -13,7 +13,9 @@ package model.gerenciadores;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.entities.Cliente;
 import model.entities.Fornecedor;
+import model.entities.Venda;
 /**
  * Classe para criação do objeto Gerenciador de Fornecedores
  * @author Cláudia Inês Sales
@@ -195,6 +197,8 @@ public class GerenciadorFornecedores {
 		return f1;
 		
 	}
+
+
 	
 	
 	

@@ -51,8 +51,9 @@ public class GerenciadorPratos {
 	 * @param alterarPrato Prato que será utilizado como parâmetro para substituição
 	 */
 	
-	private static void editar(Prato pratoEdit, Prato alterarPrato) {		
-		//Troca a categoria do prato se for diferente
+	private static void editar(Prato pratoEdit, Prato alterarPrato) {	
+		listaDePratos.set(listaDePratos.indexOf(pratoEdit),alterarPrato);
+	/*	//Troca a categoria do prato se for diferente
 		if(pratoEdit.getCategoria() != alterarPrato.getCategoria()) {
 			pratoEdit.setCategoria(alterarPrato.getCategoria());
 		}
@@ -70,7 +71,7 @@ public class GerenciadorPratos {
 		}
 		if(pratoEdit.getIngredientes() != alterarPrato.getIngredientes()) {
 			pratoEdit.setIngredientes(alterarPrato.getIngredientes());
-		}
+		}*/
 		
 	}
 	
@@ -108,6 +109,10 @@ public class GerenciadorPratos {
 	
 	}
 	
+	public static void remover(Prato p) {
+		listaDePratos.remove(p);
+	}
+	
 	/**
 	 * Metódo para pegar a lista completa dos pratos
 	 * @return Lista Prato - Lista de pratos existentes no gerenciador
@@ -127,6 +132,8 @@ public class GerenciadorPratos {
 		return prato;
 	}
 	
+	
+
 	/**
 	 * Metódo para fazer a listagem dos fornecedores
 	 * @return String - Listagem completa dos fornecedores
@@ -209,12 +216,4 @@ public class GerenciadorPratos {
 		
 		return list;
 	}
-
-	public static void remover(Prato prato) {
-		listaDePratos.remove(prato);
-		
-	}
-	
-	
-
 }
