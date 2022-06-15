@@ -36,8 +36,6 @@ import model.utils.Alerts;
 
 public class UsuariosController implements Initializable{
 	
-	public static Integer count=0;
-	
 	@FXML
 	private Button voltar;
 	
@@ -87,14 +85,7 @@ public class UsuariosController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		initalizeNode();
-		
-		if(count==0) {
-			GerenciadorUsuarios.addOuEdit(new Gerente("nome","senha","login"));
-			GerenciadorUsuarios.addOuEdit(new Funcionario("nome2","senha2","login2"));
-			count=1;
-		}
-	
+		initalizeNode();	
 		updateData();
 		initInfoButtons();
 		initExcluirButtons();

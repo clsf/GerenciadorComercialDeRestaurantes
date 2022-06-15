@@ -49,10 +49,19 @@ public class GerenciadorUsuarios {
 	 * @param usuarioEdit Objeto do tipo Usuário que já existe na lista  e será editado
 	 * @param alterarUsuario Objeto do tipo Usuário que será utilizado como parâmetro para
 	 * substituição
+	 * @throws DomainException 
 	 */
-	private static void editar(Usuario usuarioEdit, Usuario alterarUsuario) {
+	private static void editar(Usuario usuarioEdit, Usuario alterarUsuario) throws DomainException {
 		
-		listaUsuarios.set(listaUsuarios.indexOf(usuarioEdit),alterarUsuario);
+		Usuario usuario = GerenciadorUsuarios.getListaDeUsuarios().stream().filter(x -> x.getLogin().equals(alterarUsuario.getLogin())).findFirst().orElse(null);
+		
+		if(usuario!=null) {
+			throw new DomainException("Login já está sendo utilizado!");
+		}else {
+			listaUsuarios.set(listaUsuarios.indexOf(usuarioEdit),alterarUsuario);
+		}
+		
+		
 		
 		/*listaUsuarios.add(alterarUsuario);
 		listaUsuarios.remove(usuarioEdit);
@@ -88,9 +97,10 @@ public class GerenciadorUsuarios {
 	 * Nele o objeto passado será verificado se já existe na lista, se não existir será
 	 * adicionado, caso já exista será editado.
 	 * @param usuario Objeto do tipo usuário que será adicionado ou editado
+	 * @throws DomainException 
 	 */
 	
-	public static void addOuEdit(Usuario usuario) {
+	public static void addOuEdit(Usuario usuario) throws DomainException {
 		//Verifica a existência do usuário na lista através do ID
 		Usuario usuarioExistente = GerenciadorUsuarios.listaUsuarios.stream().filter(x -> x.getId() == usuario.getId())
 				.findFirst().orElse(null);
@@ -189,18 +199,19 @@ public class GerenciadorUsuarios {
 	 * @param login Login do usuário
 	 * @param senha Senha do Usuário
 	 * @return Objeto do tipo usuário confirmando o login ou null não reconhecendo o usuário
+	 * @throws DomainException 
 	 */
-	public static Usuario login(String login, String senha) {
+	public static Usuario login(String login, String senha) throws DomainException {
 
 		Usuario usuario =GerenciadorUsuarios.listaUsuarios.stream().filter(x -> x.getLogin().equals(login)).findFirst().orElse(null);
 
 
-		if(usuario!=null) {		
+		if(usuario!=null) {			
 			if(usuario.getSenha().equals(senha)) {				
 				return usuario;
 			}
-		}
-		return null;
+		}			
+		throw new DomainException("Usuário não encontrado! Por favor verificar login e senha.");
 	}
 	/**
 	 * Metódo para cadastrar um usuário 

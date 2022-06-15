@@ -12,11 +12,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-
-			Parent parent = FXMLLoader.load(getClass().getResource("/gui/MenuView.fxml"));
+			
+			Parent parent = FXMLLoader.load(getClass().getResource("/gui/loginView.fxml"));
 			Scene scene = new Scene(parent);
 			stage.setScene(scene);
-			stage.setTitle("Usuarios");
+			stage.setTitle("login");
+			stage.setResizable(false);
 			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

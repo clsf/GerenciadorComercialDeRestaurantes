@@ -35,7 +35,7 @@ import model.utils.Alerts;
 
 public class ClientesController implements Initializable {
 	
-	private static Integer count=0;
+
 	
 	@FXML
 	private Button voltar;
@@ -87,12 +87,6 @@ public class ClientesController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initalizeNode();
-		
-		if(count==0) {
-			GerenciadorClientes.addOuEdit(new Cliente("Nome1","Endereço1",1245,54587));
-			GerenciadorClientes.addOuEdit(new Cliente("Nome2","Endereço2",1245,54587));
-			count++;
-		}
 		updateData();
 		initInfoButtons();
 		initExcluirButtons();

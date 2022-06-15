@@ -38,8 +38,7 @@ import model.utils.Alerts;
 import model.utils.Restringir;
 
 public class ProdutosController implements Initializable {
-	
-	private static Integer count=0;
+
 	SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 
 	@FXML
@@ -92,21 +91,6 @@ public class ProdutosController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initalizeNode();
-		if(count==0) {
-		
-			try {
-				Date data1 = sdf1.parse("03/04/2022");
-				Date data2 = sdf1.parse("04/03/2022");
-				Produto p1 = new Produto("Refrigerante",5.0,data1,5.0);		
-				GerenciadorProdutos.addOuEdit(p1);						
-				Produto p2 = new Produto("Arroz", 4.0, data2,6.0);
-				GerenciadorProdutos.addOuEdit(p2);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
 		updateData();
 		initInfoButtons();
 		initExcluirButtons();

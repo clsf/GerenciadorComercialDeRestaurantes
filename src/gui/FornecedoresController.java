@@ -35,8 +35,6 @@ import model.utils.Alerts;
 
 public class FornecedoresController implements Initializable{
 	
-	public static Integer count=0;
-	
 	@FXML
 	private Button voltar;
 	
@@ -84,12 +82,7 @@ public class FornecedoresController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		initalizeNode();
-		List<Integer>p = new ArrayList<>();
-		p.add(2);
-		
-		GerenciadorFornecedores.addOuEdit(new Fornecedor(2,"Luiz","rua",p));
-		
+		initalizeNode();		
 		updateData();
 		initInfoButtons();
 		initExcluirButtons();

@@ -93,16 +93,8 @@ public class PratosController implements Initializable {
 		initInfoButtons();
 		initExcluirButtons();
 		radioCodigo.setSelected(true);
-		radioNome.setSelected(false);
-		
-		List<Ingredientes> ingrediente = new ArrayList<>();
-		ingrediente.add(new Ingredientes(1,5.0,UnidadeDeMedida.L)); ingrediente.add(new Ingredientes(1,5.0,UnidadeDeMedida.KG));
+		radioNome.setSelected(false);		
 
-		
-		Prato p1 = new Prato("Macarrão",8.5,CategoriaPrato.MASSA,"Macarrão ao molho",ingrediente);
-		Prato p2 = new Prato("Refigerante",5.0,CategoriaPrato.BEBIDA,"Refrigerante de Uva",ingrediente);
-		GerenciadorPratos.addOuEdit(p1);
-		GerenciadorPratos.addOuEdit(p2);
 		updateData();
 		
 	}
