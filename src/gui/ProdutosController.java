@@ -51,6 +51,9 @@ public class ProdutosController implements Initializable {
 	private Button buscar;
 	
 	@FXML
+	private Button relatorio;
+	
+	@FXML
 	private TextField campoBusca;	
 	
 	@FXML 
@@ -281,6 +284,17 @@ public class ProdutosController implements Initializable {
 			  scene = new Scene(root);
 			  stage.setScene(scene);
 			  stage.show();
+		}
+		
+		public void onBtRelatorio(ActionEvent event) throws IOException {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/relatorioEstoqueView.fxml"));
+			Pane pane = loader.load();	
+
+			Stage dialogStage = new Stage();			
+			dialogStage.setScene(new Scene(pane));
+			dialogStage.setResizable(false);	
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.showAndWait();
 		}
 
 }

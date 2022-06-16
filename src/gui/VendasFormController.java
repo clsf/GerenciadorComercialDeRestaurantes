@@ -51,6 +51,7 @@ public class VendasFormController implements Initializable {
 	private static Venda venda;
 	private List<Integer> itens = new ArrayList<>();
 	SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+	SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
     @FXML
     private Button adicionar;
@@ -120,6 +121,8 @@ public class VendasFormController implements Initializable {
 			textCodigo.setText(String.valueOf(Venda.getUltimoId()));
 			labelStatus.setText("ABERTO");	
 			btRealizarVenda.setDisable(true);
+			Date atual = new Date();
+			textData.setText(sdf2.format(atual));
 		}
 		else {
 			textCodigo.setText(String.valueOf(venda.getId()));

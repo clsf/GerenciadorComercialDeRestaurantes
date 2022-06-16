@@ -10,6 +10,7 @@ do código, e estou ciente que estes trechos não serão considerados para fins de 
 ******************************************************************************************/
 package model.entities;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -189,6 +190,11 @@ public class Produto {
 						"\nValidade: "+sdf1.format(p.getValidade())+"\nQuantidade: "+p.getQuantidade();
 		return info;
 		
+	}
+
+	public Date getValidadeD() {
+		
+		return validade;
 	}
 	
 	
