@@ -39,6 +39,9 @@ public class FornecedoresController implements Initializable{
 	private Button voltar;
 	
 	@FXML
+	private Button btRelatorios;
+	
+	@FXML
 	private Button adicionar;
 	
 	@FXML
@@ -133,10 +136,8 @@ public class FornecedoresController implements Initializable{
 			}
 		}else {
 			if(campoBusca.getText()!=null) {
-				System.out.println(campoBusca.getText()+"oiii");
 				String nome = campoBusca.getText();
 				list = GerenciadorFornecedores.buscar(nome);
-				System.out.println(list.size());
 				updateData(list);
 				
 			}
@@ -271,5 +272,16 @@ public class FornecedoresController implements Initializable{
 			
 		});
 		
+	}
+	
+	public void onBtRelatorios(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/relatorioFornecedorView.fxml"));
+		Pane pane = loader.load();	
+
+		Stage dialogStage = new Stage();			
+		dialogStage.setScene(new Scene(pane));
+		dialogStage.setResizable(false);	
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.showAndWait();
 	}
 }

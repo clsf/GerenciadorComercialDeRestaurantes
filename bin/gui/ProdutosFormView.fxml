@@ -42,7 +42,7 @@
             <TextField fx:id="textCodigo" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="textNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="textPreco" prefHeight="25.0" prefWidth="129.0" GridPane.columnIndex="4" />
-            <TextField fx:id="textValidade" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="textValidade" promptText="dd/mm/aaaa" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <HBox prefHeight="45.0" prefWidth="161.0" spacing="40.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
                   <Button fx:id="salvar" mnemonicParsing="false" onAction="#onBtSalvar" prefHeight="25.0" prefWidth="57.0" text="Salvar" />

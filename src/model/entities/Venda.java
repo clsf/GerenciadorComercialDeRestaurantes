@@ -28,6 +28,7 @@ import model.gerenciadores.GerenciadorPratos;
  */
 public class Venda {
 	SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+	SimpleDateFormat sdf2 = new SimpleDateFormat("MM/yyyy");
 	private static Integer ultimoId=1; // Salva o último ID utilizado, atributo pertencente a classe
 	private Integer id;   			   // Id da Venda
 	private FormaDePagamento formaDePagamento; // Forma de pagamento podendo ser Débito, a vista, 
@@ -77,6 +78,7 @@ public class Venda {
 		this.data = data;
 		this.itens = itens;
 		this.cliente = cliente;
+		this.status = status;
 	}
 	
 
@@ -118,6 +120,9 @@ public class Venda {
 		return sdf1.format(data);
 	}
 	
+	public String getDataR() {
+		return sdf2.format(data);
+	}
 
 	
 	/**
@@ -163,6 +168,17 @@ public class Venda {
 	 */
 	
 	public Double precoTotal(List<Prato> pratos) {
+		Double precototal=(double) 0;
+		for(Integer item : this.itens) {
+			Prato prato = pratos.stream().filter(x -> x.getId() == item)
+					.findFirst().orElse(null);
+			precototal+= prato.getPreco();
+		}
+		
+		return precototal;
+	}
+	
+	public Double getPrecoTotal(List<Prato> pratos) {
 		Double precototal=(double) 0;
 		for(Integer item : this.itens) {
 			Prato prato = pratos.stream().filter(x -> x.getId() == item)
@@ -232,6 +248,7 @@ public class Venda {
 				}
 			}
 		}
+		
 		this.status=StatusDaVenda.FECHADO;
 	}
 	
@@ -275,6 +292,18 @@ public class Venda {
 		return precoTotal(GerenciadorPratos.getPrato());
 	}
 	
+	public String getPratos() {
+		String pratos = "";
+		
+		for(Integer idPrato: this.itens) {
+			if(GerenciadorPratos.getPrato(idPrato)!=null) {
+				pratos+="("+idPrato+")"+" "+GerenciadorPratos.getPrato(idPrato).getNome()+",";
+			}
+		}
+		
+		pratos = pratos.substring(0, pratos.length()-1);
+		return pratos;
+	}
 	
 
 }

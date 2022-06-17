@@ -145,7 +145,6 @@ public class PratosController implements Initializable {
 				
 				String nome = campoBusca.getText();
 				list = GerenciadorPratos.buscar(nome);
-				System.out.println(list.size());
 				updateData(list);
 				
 			}

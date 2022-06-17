@@ -16,10 +16,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Produto;
 import model.gerenciadores.GerenciadorProdutos;
+import model.utils.Alerts;
 import model.utils.Relatorios;
+import model.utils.Restringir;
 
 public class relatorioEstoqueController implements Initializable{
 	
@@ -45,7 +49,12 @@ public class relatorioEstoqueController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		checkTotal.setSelected(true);
+		restringir();
 		
+	}
+	
+	public void restringir() {
+		Restringir.setTextFieldInteger(textProduto);
 	}
 	
 	public void onChectotal(ActionEvent event) {
@@ -89,11 +98,18 @@ public class relatorioEstoqueController implements Initializable{
 			ProdutosImprimirController.setTipo(3);
 		}
 		
-		  root = FXMLLoader.load(getClass().getResource("/gui/ProdutosImprimirView.fxml"));
-		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.show();
+		if(lista.size()!=0) {
+			  root = FXMLLoader.load(getClass().getResource("/gui/ProdutosImprimirView.fxml"));
+			  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			  scene = new Scene(root);
+			  stage.setScene(scene);
+			  stage.setResizable(false);
+			  stage.showAndWait();
+		}else {
+			Alerts.showAlert("Estoque vazio", "Sem estoque!","Não há produto cadastrados." , AlertType.INFORMATION);
+
+		}
+	
 	}
 	
 }

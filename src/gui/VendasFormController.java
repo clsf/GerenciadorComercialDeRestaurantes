@@ -130,7 +130,7 @@ public class VendasFormController implements Initializable {
 			comboPagamento.setValue(venda.getFormaDePagamento());
 			comboClientes.setValue(venda.getCliente());
 			labelStatus.setText(String.format("%s", venda.getStatus()));
-			labelPreco.setText(String.format("%f",venda.precoTotal(GerenciadorPratos.getPrato())));			
+			labelPreco.setText(String.format("%.2f",venda.precoTotal(GerenciadorPratos.getPrato())));			
 			itens.addAll( venda.getItens());
 			
 			if(venda.getStatus().equals(StatusDaVenda.FECHADO)) {
@@ -221,9 +221,11 @@ public class VendasFormController implements Initializable {
 			}
 			
 			if(venda!=null) {
+				
 				Venda v = new Venda(Integer.valueOf(textCodigo.getText()), comboPagamento.getSelectionModel().getSelectedItem(),
 						sdf1.parse(textData.getText()), status,itens, comboClientes.getSelectionModel().getSelectedItem() );
 				GerenciadorVendas.addOuEdit(v);
+
 			}
 			else {
 				Venda v = new Venda(comboPagamento.getSelectionModel().getSelectedItem(),sdf1.parse(textData.getText()), itens, status,comboClientes.getSelectionModel().getSelectedItem() );
@@ -240,7 +242,6 @@ public class VendasFormController implements Initializable {
 	public void onBtRealizarVenda(ActionEvent event) {
 		try {
 			Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente realizar a venda? Não poderá ser editada após a realização!");
-			System.out.println(itens.size());
 				if(opcao.get()==ButtonType.OK) {
 				venda.realizarVenda(GerenciadorPratos.getPrato(), GerenciadorProdutos.getListaDeProdutos());
 				

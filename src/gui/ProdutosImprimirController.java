@@ -61,11 +61,7 @@ public class ProdutosImprimirController implements Initializable{
 	private Label labelTitulo;
 	
 	
-	
-	
-	private Stage stage;
-	 private Scene scene;
-	 private Parent root;
+
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

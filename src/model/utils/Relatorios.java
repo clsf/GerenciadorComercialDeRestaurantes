@@ -17,6 +17,7 @@ package model.utils;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,15 +41,16 @@ public class Relatorios {
 	 * Metódo para retornar lista contendo as vendas de um determinado período
 	 * @param data Data que foram realizadas as vendas
 	 * @return Lista do tipo venda contendo vendas realizadas no período 
+	 * @throws ParseException 
 	 */
 	
-	public static List<Venda> relatorioVendaPorPeriodo(Date data) {
+	public static List<Venda> relatorioVendaPorPeriodo(Date data) throws ParseException {
 		List<Venda> vendas = new ArrayList<>();
 		SimpleDateFormat sdf1= new SimpleDateFormat("MM/yyyy");
 		
 		
-		for(Venda venda: GerenciadorVendas.getListaDeVendas()) {
-			if(sdf1.format(venda.getData()).equals(sdf1.format(data))) {
+		for(Venda venda: GerenciadorVendas.getListaDeVendas()) {		
+			if(venda.getDataR().equals(sdf1.format(data))) {
 				vendas.add(venda);
 			}
 		}		
@@ -303,7 +305,7 @@ public class Relatorios {
 		Date atual= new Date();
 		String arquivoPdf="relatorioEstoque"+sdf2.format(atual);
 		String titulo="";
-		System.out.println(tipo);
+
 		if(tipo==1) {
 			
 			titulo ="Relatório de Estoque - "+sdf1.format(atual);

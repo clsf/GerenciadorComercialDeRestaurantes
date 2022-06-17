@@ -136,10 +136,8 @@ public class UsuariosController implements Initializable{
 			}
 		}else {
 			if(campoBusca.getText()!=null) {
-				System.out.println(campoBusca.getText()+"oiii");
 				String nome = campoBusca.getText();
 				list = GerenciadorUsuarios.buscar(nome);
-				System.out.println(list.size());
 				updateData(list);
 				
 			}

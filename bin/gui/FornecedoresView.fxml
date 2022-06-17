@@ -54,5 +54,6 @@
             <Button fx:id="buscar" layoutX="230.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBtBuscar" prefHeight="25.0" prefWidth="52.0" text="Buscar" />
          </children>
       </AnchorPane>
+      <Button fx:id="btRelatorios" layoutX="517.0" layoutY="13.0" mnemonicParsing="false" onAction="#onBtRelatorios" text="Relatórios" />
    </children>
 </AnchorPane>

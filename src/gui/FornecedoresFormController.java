@@ -30,6 +30,7 @@ import model.entities.Produto;
 import model.gerenciadores.GerenciadorFornecedores;
 import model.gerenciadores.GerenciadorProdutos;
 import model.utils.Alerts;
+import model.utils.Restringir;
 
 public class FornecedoresFormController implements Initializable {
 	
@@ -111,6 +112,8 @@ public class FornecedoresFormController implements Initializable {
 			
 		}
 		
+		restringir();
+		
 		Callback<ListView<Produto>, ListCell<Produto>> factory = lv -> new ListCell<Produto>() {
 			 @Override
 			 protected void updateItem(Produto item, boolean empty) {
@@ -120,6 +123,10 @@ public class FornecedoresFormController implements Initializable {
 			};
 			comboProdutos.setCellFactory(factory);
 			comboProdutos.setButtonCell(factory.call(null));
+	}
+	
+	public void restringir() {
+		Restringir.setTextFieldInteger(textCnpj);		
 	}
     
     public void onBtAdicionar(ActionEvent event) {
@@ -151,7 +158,6 @@ public class FornecedoresFormController implements Initializable {
 		
 		if(opcao.get()==ButtonType.OK) {
 			idProdutos.removeIf(x-> x.equals(produto.getId()));
-			System.out.print("Entrou aqui be");
 		}
 		updateData();
 	}

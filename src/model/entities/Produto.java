@@ -47,7 +47,6 @@ public class Produto {
 		this.validade = validade;
 		this.quantidade = quantidade;
 		ultimoId++;
-		System.out.print("Entrou aqui");
 	}
 
 	/**

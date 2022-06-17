@@ -49,7 +49,6 @@ public class loginController implements Initializable {
 		
 		try {
 			Usuario usuario = GerenciadorUsuarios.login(fieldLogin.getText(), fieldSenha.getText());
-			System.out.println(usuario.getLogin());
 			if(usuario!=null) {
 				  root = FXMLLoader.load(getClass().getResource("/gui/MenuView.fxml"));
 				  stage = (Stage)((Node)event.getSource()).getScene().getWindow();

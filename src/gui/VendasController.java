@@ -41,6 +41,9 @@ public class VendasController implements Initializable {
 	
     @FXML
     private Button adicionar;
+    
+    @FXML
+    private Button btRelatorios;
 
     @FXML
     private Button buscar;
@@ -150,7 +153,6 @@ public class VendasController implements Initializable {
 			if(campoBusca.getText()!=null) {
 				String nome = campoBusca.getText();
 				list = GerenciadorVendas.buscarCliente(nome);
-				System.out.println(list.size());
 				updateData(list);
 				
 			}
@@ -286,5 +288,14 @@ public class VendasController implements Initializable {
 			
 		}
 		
+	public void obBtRelatorios(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/relatorioVendaView.fxml"));
+		Pane pane = loader.load();	
 
+		Stage dialogStage = new Stage();			
+		dialogStage.setScene(new Scene(pane));
+		dialogStage.setResizable(false);	
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.showAndWait();
+	}
 }

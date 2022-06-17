@@ -35,6 +35,7 @@ import model.enums.UnidadeDeMedida;
 import model.gerenciadores.GerenciadorPratos;
 import model.gerenciadores.GerenciadorProdutos;
 import model.utils.Alerts;
+import model.utils.Restringir;
 
 public class PratosFormController implements Initializable{
 	
@@ -125,7 +126,7 @@ public class PratosFormController implements Initializable{
 			textDescricao.setText(prato.getDescricao());
 			ingredientes.addAll(prato.getIngredientes());
 		}
-		
+		restringir();
 		updateData();
 		
 		Callback<ListView<Produto>, ListCell<Produto>> factory = lv -> new ListCell<Produto>() {
@@ -139,6 +140,11 @@ public class PratosFormController implements Initializable{
 			comboProdutos.setButtonCell(factory.call(null));
 	
 	
+	}
+	
+	private void restringir() {
+		Restringir.setTextFieldDouble(textPreco);
+		Restringir.setTextFieldDouble(textQuantidade);
 	}
 	
     public void onBtAdicionar(ActionEvent event) {

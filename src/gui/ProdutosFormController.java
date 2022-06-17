@@ -53,13 +53,18 @@ public class ProdutosFormController implements Initializable {
 			textCodigo.setText(String.valueOf(Produto.getUltimoId()));
 		}else {
 			textCodigo.setText(String.format("%d",produto.getId()));
-			textQuantidade.setText(String.format("%f",produto.getQuantidade()));
+			textQuantidade.setText(String.format("%.2f",produto.getQuantidade()));
 			textValidade.setText(produto.getValidade());
 			textNome.setText(produto.getNome());
-			textPreco.setText(String.format("%f",produto.getPreco()));
+			textPreco.setText(String.format("%.2f",produto.getPreco()));
 
 		}		
+		
+	}
+	
+	private void restringir() {
 		Restringir.setTextFieldDouble(textPreco);
+		Restringir.setTextFieldDouble(textQuantidade);
 	}
 	
 	public void onBtSalvar() throws NumberFormatException, ParseException {

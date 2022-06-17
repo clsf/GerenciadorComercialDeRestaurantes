@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.entities.Cliente;
 import model.gerenciadores.GerenciadorClientes;
+import model.utils.Restringir;
 
 
 public class ClientesFormController implements Initializable {
@@ -40,7 +41,7 @@ public class ClientesFormController implements Initializable {
 	
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1) {		
 		if(cliente==null) {			
 			textCodigo.setText(String.valueOf(Cliente.getUltimoId()));
 		}else {
@@ -52,6 +53,14 @@ public class ClientesFormController implements Initializable {
 
 		}	
 		
+		
+		restringir();
+		
+	}
+	
+	public void restringir() {
+		Restringir.setTextFieldInteger(textCpf);
+		Restringir.setTextFieldInteger(textTelefone);
 	}
 	
 	public void onBtSalvar() {

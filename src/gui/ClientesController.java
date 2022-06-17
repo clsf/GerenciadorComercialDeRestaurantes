@@ -136,10 +136,8 @@ public class ClientesController implements Initializable {
 			}
 		}else {	
 			if(campoBusca.getText()!=null) {
-				System.out.println(campoBusca.getText()+"oiii");
 				String nome = campoBusca.getText();
 				list = GerenciadorClientes.buscar(nome);
-				System.out.println(list.size());
 				updateData(list);
 				
 			}

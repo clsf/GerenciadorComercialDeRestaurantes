@@ -61,6 +61,7 @@ public class UsuariosFormController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(usuario==null) {
 			textCodigo.setText(String.valueOf(Usuario.getUltimoId()));
+			
 		}else {
 			textCodigo.setText(String.format("%d",usuario.getId()));
 			textLogin.setText(usuario.getLogin());

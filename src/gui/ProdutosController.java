@@ -145,10 +145,8 @@ public class ProdutosController implements Initializable {
 			}
 		}else {	
 			if(campoBusca.getText()!=null) {
-				System.out.println(campoBusca.getText()+"oiii");
 				String nome = campoBusca.getText();
 				list = GerenciadorProdutos.buscar(nome);
-				System.out.println(list.size());
 				updateData(list);
 				
 			}

@@ -13,6 +13,8 @@ package model.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.gerenciadores.GerenciadorProdutos;
 /**
  * Classe para criação dos Fornecedores
  * @author Cláudia Inês Sales
@@ -169,6 +171,19 @@ public class Fornecedor {
 		}
 		return info;
 		
+	}
+	
+	public String getProdutos() {
+		String produtos = "";
+		
+		for(Integer idProduto: this.idProdutosFornecidos) {
+			if(GerenciadorProdutos.getProduto(idProduto)!=null) {
+				produtos+="("+idProduto+")"+" "+GerenciadorProdutos.getProduto(idProduto).getNome()+",";
+			}
+		}
+		
+		produtos = produtos.substring(0, produtos.length()-1);
+		return produtos;
 	}
 	
 }
