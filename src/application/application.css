@@ -1,1 +1,20 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+.icon-button {
+    -fx-background-color: transparent, transparent, transparent, transparent, transparent;
+}
+
+.icon-button:hover{
+	-fx-cursor: hand;	
+}
+
+.buttonEntrar:hover{
+	-fx-cursor: hand;	
+}
+
+.menuBack{
+	-fx-background-color:rgb(0,0,255);
+-fx-opacity:0.8;
+}
+

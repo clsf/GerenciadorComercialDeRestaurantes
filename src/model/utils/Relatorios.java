@@ -217,7 +217,7 @@ public class Relatorios {
 				}
 				
 				cel1= new PdfPCell(new Paragraph(venda.getId()+""));
-				cel2= new PdfPCell(new Paragraph(sdf2.format(venda.getData())));
+				cel2= new PdfPCell(new Paragraph(venda.getDataR()));
 				cel3= new PdfPCell(new Paragraph(prt));		
 				cel4= new PdfPCell(new Paragraph(venda.precoTotal(GerenciadorPratos.getPrato())+" R$"));
 				cel5= new PdfPCell(new Paragraph(venda.getItens().size()+""));

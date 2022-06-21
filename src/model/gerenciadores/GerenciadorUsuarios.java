@@ -55,7 +55,7 @@ public class GerenciadorUsuarios {
 		
 		Usuario usuario = GerenciadorUsuarios.getListaDeUsuarios().stream().filter(x -> x.getLogin().equals(alterarUsuario.getLogin())).findFirst().orElse(null);
 		
-		if(usuario!=null) {
+		if(usuario!=null && !usuario.getId().equals(usuarioEdit.getId())) {			
 			throw new DomainException("Login já está sendo utilizado!");
 		}else {
 			listaUsuarios.set(listaUsuarios.indexOf(usuarioEdit),alterarUsuario);

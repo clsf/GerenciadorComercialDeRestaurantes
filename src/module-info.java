@@ -7,11 +7,12 @@ module GerenciadorComercialDeRestaurantes {
 	requires itextpdf;
 	
 	opens application to javafx.graphics, javafx.fxml, javafx.controls,itextpdf;
-	opens gui to javafx.graphics, javafx.fxml, javafx.controls,itextpdf;
+	opens gui.controller to javafx.graphics, javafx.fxml, javafx.controls,itextpdf;
 
 	
 	
-	exports gui;
+	exports gui.controller;	
+	
 	exports model.entities;
 	exports model.utils;
 	exports model.enums;
