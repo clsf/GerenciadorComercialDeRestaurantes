@@ -26,12 +26,16 @@
             <RowConstraints maxHeight="88.0" minHeight="0.0" prefHeight="58.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="170.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="66.0" minHeight="0.0" prefHeight="66.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Código da Venda:" />
+            <Label text="Código da Venda:">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin></Label>
             <Label text="Data:" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="50.0" />
+                  <Insets left="35.0" />
                </GridPane.margin>
             </Label>
             <Label text="Forma de Pagamento:" GridPane.rowIndex="2">
@@ -48,7 +52,10 @@
             </Label>
             <ComboBox fx:id="comboPagamento" prefHeight="25.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ComboBox fx:id="comboClientes" prefHeight="25.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="Status da venda:" GridPane.rowIndex="4" />
+            <Label text="Status da venda:" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="25.0" />
+               </GridPane.margin></Label>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
                   <Label fx:id="labelStatus" prefHeight="28.0" prefWidth="53.0">
@@ -63,6 +70,16 @@
                   </Button>
                </children>
             </HBox>
+            <Label text="Emitir nota:" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </Label>
+            <Button fx:id="btEmitirNota" mnemonicParsing="false" onAction="#onBtEmitirNota" prefHeight="25.0" prefWidth="92.0" styleClass="buttonEntrar" text="Emitir" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="42.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
       <HBox layoutX="250.0" layoutY="359.0" prefHeight="80.0" prefWidth="257.0" spacing="40.0">

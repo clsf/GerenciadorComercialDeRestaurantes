@@ -45,6 +45,7 @@ import model.gerenciadores.GerenciadorPratos;
 import model.gerenciadores.GerenciadorProdutos;
 import model.gerenciadores.GerenciadorVendas;
 import model.utils.Alerts;
+import model.utils.Relatorios;
 
 public class VendasFormController implements Initializable {
 	
@@ -61,6 +62,9 @@ public class VendasFormController implements Initializable {
     
     @FXML
     private Button btRealizarVenda;
+    
+    @FXML 
+    private Button btEmitirNota;
 
     @FXML
     private ComboBox<Cliente> comboClientes;
@@ -121,6 +125,7 @@ public class VendasFormController implements Initializable {
 			textCodigo.setText(String.valueOf(Venda.getUltimoId()));
 			labelStatus.setText("ABERTO");	
 			btRealizarVenda.setDisable(true);
+			btEmitirNota.setDisable(true);
 			Date atual = new Date();
 			textData.setText(sdf2.format(atual));
 		}
@@ -132,15 +137,17 @@ public class VendasFormController implements Initializable {
 			labelStatus.setText(String.format("%s", venda.getStatus()));
 			labelPreco.setText(String.format("%.2f",venda.precoTotal(GerenciadorPratos.getPrato())));			
 			itens.addAll( venda.getItens());
-			
+			btEmitirNota.setDisable(true);
 			if(venda.getStatus().equals(StatusDaVenda.FECHADO)) {
-				Alerts.showAlert("Venda Fechada", "Essa venda está fechada!","Uma venda fechada não pode ser editada." , AlertType.INFORMATION);			
-				
+								
 				textData.setDisable(true);
 				comboPagamento.setDisable(true);
 				comboClientes.setDisable(true);
 				salvar.setDisable(true);
 				adicionar.setDisable(true);
+				btEmitirNota.setDisable(false);
+				btRealizarVenda.setDisable(true);
+				Alerts.showAlert("Venda Fechada", "Essa venda está fechada!","Uma venda fechada não pode ser editada apenas emitida." , AlertType.INFORMATION);			
 				
 			}
 		}
@@ -246,6 +253,16 @@ public class VendasFormController implements Initializable {
 				venda.realizarVenda(GerenciadorPratos.getPrato(), GerenciadorProdutos.getListaDeProdutos());
 				
 				labelStatus.setText(String.valueOf(venda.getStatus()));
+				btEmitirNota.setDisable(false);				
+				textData.setDisable(true);
+				comboPagamento.setDisable(true);
+				comboClientes.setDisable(true);
+				salvar.setDisable(true);
+				adicionar.setDisable(true);
+				btRealizarVenda.setDisable(true);
+				Alerts.showAlert("Salvo", "Informações salvas", "Informações salvas com sucesso, não poderá ser alterada", AlertType.INFORMATION);
+				
+				
 			}
 			
 		} catch (DomainException e) {
@@ -299,6 +316,10 @@ public class VendasFormController implements Initializable {
 	public static void setVenda(Venda object) {
 		venda = object; 
 		
+	}
+	
+	public void onBtEmitirNota(ActionEvent event) {		
+		Relatorios.emitirNota(venda);
 	}
 
 

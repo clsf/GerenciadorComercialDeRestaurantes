@@ -27,7 +27,7 @@ import model.gerenciadores.GerenciadorPratos;
  *
  */
 public class Venda {
-	SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+	SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");	
 	SimpleDateFormat sdf2 = new SimpleDateFormat("MM/yyyy");
 	private static Integer ultimoId=1; // Salva o último ID utilizado, atributo pertencente a classe
 	private Integer id;   			   // Id da Venda
@@ -123,7 +123,9 @@ public class Venda {
 	public String getDataR() {
 		return sdf2.format(data);
 	}
-
+	public Date getDataR2() {
+		return this.data;
+	}
 	
 	/**
 	 * Metódo para configurar data da venda

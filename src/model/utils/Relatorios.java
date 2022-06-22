@@ -512,6 +512,100 @@ public class Relatorios {
 	}
 	
 	
+	public static void emitirNota(Venda v) {
+		SimpleDateFormat sdf1= new SimpleDateFormat("dd-MM-yyyy hh-ss");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Document doc = new Document();
+		Date atual= new Date();
+		String arquivoPdf="relatorioVenda "+sdf1.format(atual);
+		
+		try {
+			
+			PdfWriter.getInstance(doc, ( new FileOutputStream(arquivoPdf)));
+			doc.open();			
+			Paragraph p=new Paragraph("Nota de compra");
+			p.setAlignment(1);
+			doc.add(p);
+			p= new Paragraph("\n");
+			doc.add(p);
+			
+			p= new Paragraph("------------------------------------------------------------------------------------------------------------------------");
+			doc.add(p);
+		
+			
+			p=new Paragraph(sdf2.format(v.getDataR2()));
+			p.setAlignment(1);
+			doc.add(p);
+			
+			p= new Paragraph("------------------------------------------------------------------------------------------------------------------------");
+			doc.add(p);
+			
+			p= new Paragraph("\n");
+			doc.add(p);
+			
+			
+			PdfPTable tabela = new PdfPTable(3);
+			
+			PdfPCell cel1= new PdfPCell(new Paragraph("Código (Prato)"));
+			PdfPCell cel2= new PdfPCell(new Paragraph("Nome"));
+			PdfPCell cel3= new PdfPCell(new Paragraph("Preço"));		
+
+			
+			tabela.addCell(cel1);
+			tabela.addCell(cel2);
+			tabela.addCell(cel3);
+
+			for(Integer idPrato: v.getItens()) {
+				Prato prato = GerenciadorPratos.getPrato().stream().filter(x->x.getId() == idPrato)
+						.findFirst().orElse(null);
+				
+				if(prato!=null) {
+					cel1= new PdfPCell(new Paragraph(prato.getId()+""));
+					cel3= new PdfPCell(new Paragraph(String.valueOf(prato.getPreco())));
+					cel2= new PdfPCell(new Paragraph(prato.getNome()+"\n"));
+					
+					tabela.addCell(cel1);
+					tabela.addCell(cel2);
+					tabela.addCell(cel3);
+				}				
+		
+		
+			}
+			doc.add(tabela);
+		
+			p= new Paragraph("\n");
+				
+			doc.add(p);			
+			p= new Paragraph("Preço total: "+v.getPrecoTotal(GerenciadorPratos.getPrato())+" R$");
+			p.setAlignment(1);
+			doc.add(p);
+			
+			p= new Paragraph("------------------------------------------------------------------------------------------------------------------------");
+			doc.add(p);			
+			p = new Paragraph("Emissão: "+ sdf2.format(atual));
+			p.setAlignment(1);
+			doc.add(p);	
+			p= new Paragraph("------------------------------------------------------------------------------------------------------------------------");
+			doc.add(p);	
+			if(v.getCliente()!=null) {
+				p = new Paragraph("CONSUMIDOR CPF: " + v.getCliente().getCpf());
+			}else {
+				p = new Paragraph("CONSUMIDOR NÃO INFORMADO");
+			}
+			p.setAlignment(1);
+			doc.add(p);			
+			doc.close();			
+			Desktop.getDesktop().open(new File(arquivoPdf));
+			
+			
+		}
+			catch(Exception e) {			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	
 	
 }
