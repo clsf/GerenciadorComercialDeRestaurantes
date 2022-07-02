@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -23,7 +33,11 @@ import model.entities.Usuario;
 import model.exceptions.DomainException;
 import model.gerenciadores.GerenciadorUsuarios;
 import model.utils.Alerts;
-
+/**
+ * Controller da view de formulário de usuários
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class UsuariosFormController implements Initializable{
 
 	private static Usuario usuario;
@@ -55,7 +69,9 @@ public class UsuariosFormController implements Initializable{
 	
 
 	
-
+	/**
+	 * Metódo para inicializar o formulário de usuarios
+	 */
 	 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -74,6 +90,9 @@ public class UsuariosFormController implements Initializable{
 		
 	}
 	
+	/**
+	 * Metódo para salvar o usuário
+	 */
 	public void onBtSalvar() {
 		boolean fechar = true;
 		if(usuario!=null) {
@@ -124,7 +143,10 @@ public class UsuariosFormController implements Initializable{
 
 		
 	}
-	
+	/**
+	 * Método para cancelar e retornar a outra view
+	 * @throws IOException Erro ao abrir a tela
+	 */
 	public void onBtCancelar() throws IOException {
 		
 		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Cancelar?");
@@ -135,7 +157,9 @@ public class UsuariosFormController implements Initializable{
 		}
 	    
 	}
-	
+	/**
+	 * Método para inicializar a ComboBox
+	 */
 	public void initalizeComb() {
 		List<String> list = new ArrayList<>();
 		list.add("Gerente");
@@ -146,10 +170,18 @@ public class UsuariosFormController implements Initializable{
 		
 	}
 	
-	
+	/**
+	 * Método para alterar o usuario do controller
+	 * @param u Usuário a ser editado
+	 */
 	public static void setUsuario(Usuario u) {
 			usuario = u;
 	}
+	
+	/**
+	 * Método para pegar o usuário do controller
+	 * @return Usuário do controller
+	 */
 	
 	public static Usuario getUsuario() {
 		return usuario;

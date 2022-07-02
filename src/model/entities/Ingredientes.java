@@ -23,7 +23,7 @@ public class Ingredientes {
 	private Integer id; //Id do produto que faz parte do ingrediente
 	private Double quantidade; //Quantidade do produto 
 	private UnidadeDeMedida unidadeDeMeida;	//Unidade de medida podendo ser em KG ou L
-	private String nomeProduto;
+
 
 	/**
 	 * Construtor do objeto Ingrediente 
@@ -83,6 +83,10 @@ public class Ingredientes {
 		return id;
 	}
 	
+	/**
+	 * Metódo para pegar o nome do produto é o ingrediente
+	 * @return String com nome do produto
+	 */
 	public String getNomeProduto() {
 		String nome;
 		if(GerenciadorProdutos.getProduto(id)!=null) {

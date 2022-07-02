@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -10,7 +20,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
+/**
+ * Controller da view do Menu
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class MenuController {
 	
 	@FXML
@@ -35,6 +49,12 @@ public class MenuController {
 	 private Scene scene;
 	 private Parent root;
 	 
+	 /**
+	  * Metódo do botão Usuário, chama view de Usuários 
+	  * @param event Evento
+	  * @throws IOException Exceção 
+	  */
+	 
 	 public void onBtUsuario(ActionEvent event) throws IOException {
 		 
 			  root = FXMLLoader.load(getClass().getResource("/gui/view/ViewUsuarios.fxml"));
@@ -45,7 +65,11 @@ public class MenuController {
 			  stage.setTitle("Usuários");
 			  stage.show();
 	 }
-	 
+	 /**
+	  * Metódo do botão Clientes, chama view de Clientes
+	  * @param event Evento
+	  * @throws IOException Exceção 
+	  */
 	 public void onBtClientes(ActionEvent event) throws IOException {
 		 
 		  root = FXMLLoader.load(getClass().getResource("/gui/view/ClientesView.fxml"));
@@ -57,7 +81,11 @@ public class MenuController {
 		  stage.show();
 	 }
 	 
-	 
+	 /**
+	  * Metódo do botão Produtos, chama view de Produtos 
+	  * @param event Evento
+	  * @throws IOException Exceção 
+	  */
 	 public void onBtProdutos(ActionEvent event) throws IOException {
 		 
 		  root = FXMLLoader.load(getClass().getResource("/gui/view/ProdutosView.fxml"));
@@ -68,7 +96,11 @@ public class MenuController {
 		  stage.setTitle("Produtos");
 		  stage.show();
 	 }
-	 
+	 /**
+	  * Metódo do botão Fornecedores, chama view de Fornecedores 
+	  * @param event Evento
+	  * @throws IOException Exceção 
+	  */
 	 public void onBtFornecedores(ActionEvent event) throws IOException {
 		 
 		  root = FXMLLoader.load(getClass().getResource("/gui/view/FornecedoresView.fxml"));
@@ -79,7 +111,11 @@ public class MenuController {
 		  stage.setTitle("Fornecedores");
 		  stage.show();
 	 }
-	 
+	 /**
+	  * Metódo do botão Cardapio, chama view de Cardápio 
+	  * @param event Evento
+	  * @throws IOException Exceção 
+	  */
 	 public void onBtCardapio(ActionEvent event) throws IOException {
 		 
 		  root = FXMLLoader.load(getClass().getResource("/gui/view/PratosView.fxml"));
@@ -90,7 +126,11 @@ public class MenuController {
 		  stage.setTitle("Pratos");
 		  stage.show();
 	 }
-	 
+	 /**
+	  * Metódo do botão Venda, chama view de Venda
+	  * @param event Evento
+	  * @throws IOException Exceção 
+	  */
 	 public void onBtVenda(ActionEvent event) throws IOException {
 		 
 		  root = FXMLLoader.load(getClass().getResource("/gui/view/VendasView.fxml"));

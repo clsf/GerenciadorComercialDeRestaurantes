@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -37,7 +47,11 @@ import model.enums.StatusDaVenda;
 import model.gerenciadores.GerenciadorVendas;
 import model.utils.Alerts;
 import model.utils.buttons;
-
+/**
+ * Controller da view de Vendas
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class VendasController implements Initializable {
 	
     @FXML
@@ -94,12 +108,17 @@ public class VendasController implements Initializable {
     @FXML
     private ObservableList obsList;
     
+  //Caminho para os ícones de editar e remover
 	public final String PEN_SOLID = "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" ;
 	public final String Remove_Solid = "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z";
+	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 
+	/**
+	 * Metódo para inicializar a tela principal de fornecedores
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initalizeNode();		
@@ -112,6 +131,9 @@ public class VendasController implements Initializable {
 		
 	}
 	
+	/**
+	 * Metódo para par alterar o radio
+	 */
 	public void onRadioSelectedCodigo() {
 		if(radioCodigo.isSelected()) {
 			radioNome.setSelected(false);
@@ -124,6 +146,9 @@ public class VendasController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Metódo para par alterar o radio
+	 */
 	public void onRadioSelectedCNome() {	
 		if(radioNome.isSelected()) {
 			radioCodigo.setSelected(false);	
@@ -135,6 +160,9 @@ public class VendasController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Metódo para buscar Venda através do código ou nome
+	 */
 	public void onBtBuscar() {
 		List<Venda> list = new ArrayList<>();
 		if(radioCodigo.isSelected()) {
@@ -163,7 +191,9 @@ public class VendasController implements Initializable {
 			}
 		}
 	}
-	
+	/**
+	 * Metódo para atualizar a table view de Vendas a com todos as vendas do gerenciador
+	 */
 	public void updateData() {
 		tableViewVenda.refresh();
 		List<Venda> list = new ArrayList<>();
@@ -172,6 +202,9 @@ public class VendasController implements Initializable {
 		tableViewVenda.setItems(obsList);	
 		
 	}
+	/**
+	 * Metódo para atualizar a table view de vendas com uma lista de vendas especifica
+	 */
 	
 	public void updateData(List<Venda> venda) {	
 		tableViewVenda.refresh();
@@ -182,127 +215,160 @@ public class VendasController implements Initializable {
 		
 	}
 	
-	 public void onBtAdicionarAction() throws IOException {
-		 	VendasFormController.setVenda(null);
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/VendasFormView.fxml"));
-			Pane pane = loader.load();	
-			pane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm()); 
-			Stage dialogStage = new Stage();			
-			dialogStage.setScene(new Scene(pane));
-			dialogStage.setTitle("Vendas");
-			dialogStage.setResizable(false);	
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.showAndWait();
-			
-			updateData();
-	 }
-	 
-		public void initalizeNode() {
-			tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
-			tableColumnData.setCellValueFactory(new PropertyValueFactory<>("data"));
-			tableColumnPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
-			tableColumnPagamento.setCellValueFactory(new PropertyValueFactory<>("formaDePagamento"));
-			tableColumnCliente.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
-			tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-		}
-		
-		private void mudarTelaEditar(ActionEvent event,Venda venda) throws IOException {
-			VendasFormController.setVenda(venda);	
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/VendasFormView.fxml"));
-			Pane pane = loader.load();	
-		    pane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm()); 
-			Stage dialogStage = new Stage();			
-			dialogStage.setScene(new Scene(pane));
-			dialogStage.setResizable(false);
-			dialogStage.setTitle("Vendas");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.showAndWait();
+	/**
+	 * Metódo para chamar a tela de adicionar Vendas
+	 * @throws IOException Caso não consiga abrir a tela
+	 */
+	public void onBtAdicionarAction() throws IOException {
+		VendasFormController.setVenda(null);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/VendasFormView.fxml"));
+		Pane pane = loader.load();
+		pane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+		Stage dialogStage = new Stage();
+		dialogStage.setScene(new Scene(pane));
+		dialogStage.setTitle("Vendas");
+		dialogStage.setResizable(false);
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.showAndWait();
 
-			updateData();
-			
-			
+		updateData();
+	}
+	
+	/**
+	 * Método para inicializar os nós
+	 */
+	public void initalizeNode() {
+		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tableColumnData.setCellValueFactory(new PropertyValueFactory<>("data"));
+		tableColumnPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+		tableColumnPagamento.setCellValueFactory(new PropertyValueFactory<>("formaDePagamento"));
+		tableColumnCliente.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
+		tableColumnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+	}
+	
+	/**
+	 * Função para chamar a tela de editar venda
+	 * @param event Evento
+	 * @param venda Venda a ser editada
+	 * @throws IOException Erro
+	 */
+	private void mudarTelaEditar(ActionEvent event, Venda venda) throws IOException {
+		VendasFormController.setVenda(venda);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/VendasFormView.fxml"));
+		Pane pane = loader.load();
+		pane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+		Stage dialogStage = new Stage();
+		dialogStage.setScene(new Scene(pane));
+		dialogStage.setResizable(false);
+		dialogStage.setTitle("Vendas");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.showAndWait();
+
+		updateData();
+
+	}
+	
+	/**
+	 * Função para o botão excluir
+	 * @param event Evento 
+	 * @param venda Venda a ser excluída
+	 */
+	private void onBtExcluir(ActionEvent event, Venda venda) {
+		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim", "Deseja realmente excluir a venda?");
+
+		if (opcao.get() == ButtonType.OK) {
+			GerenciadorVendas.remover(venda);
+			;
 		}
-		
-		private void onBtExcluir(ActionEvent event, Venda venda) {
-			Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente excluir a venda?");
-			
-			if(opcao.get()==ButtonType.OK) {
-				GerenciadorVendas.remover(venda);;
+		updateData();
+	}
+	
+	/**
+	 * Função para o botão voltar
+	 * @param event Evento
+	 * @throws IOException Erro ao abrir a tela
+	 */
+	public void onBtVoltar(ActionEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("/gui/view/MenuView.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+		stage.setScene(scene);
+		stage.setTitle("Menu principal");
+		stage.show();
+	}
+	
+	/**
+	 * Função para inicializar os botões de editar
+	 */
+	private void initInfoButtons() {
+		tableColumnEDIT.setStyle("-fx-alignment: CENTER");
+		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnEDIT.setCellFactory(param -> new TableCell<Venda, Venda>() {
+			private final Button button = buttons.createIconButton(PEN_SOLID, 20);
+
+			@Override
+			protected void updateItem(Venda obj, boolean empty) {
+				super.updateItem(obj, empty);
+				if (obj == null) {
+					setGraphic(null);
+					return;
+				}
+				setGraphic(button);
+				button.setOnAction(event -> {
+					try {
+						mudarTelaEditar(event, obj);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				});
+
 			}
-			updateData();
-		}
-		
-		public void onBtVoltar(ActionEvent event) throws IOException {
-			  root = FXMLLoader.load(getClass().getResource("/gui/view/MenuView.fxml"));
-			  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			  scene = new Scene(root);
-			  scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm()); 
-			  stage.setScene(scene);
-			  stage.setTitle("Menu principal");
-			  stage.show();
-		}
-		
-		private void initInfoButtons() {
-			tableColumnEDIT.setStyle("-fx-alignment: CENTER");
-			tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-			tableColumnEDIT.setCellFactory(param -> new TableCell<Venda, Venda>() {
-				private final Button button = buttons.createIconButton(PEN_SOLID,20);
 
-				@Override
-				protected void updateItem(Venda obj, boolean empty) {
-					super.updateItem(obj, empty);
-					if (obj == null) {
-						setGraphic(null);
-						return;
-					}
-					setGraphic(button);
-					button.setOnAction(
-							event -> {
-								try {								
-									mudarTelaEditar(event,obj);
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}});
-					
-				}
-				
-			});
-			
-		}
-		
-		private void initExcluirButtons() {
-			tableColumnExcluir.setStyle("-fx-alignment: CENTER");
-			tableColumnExcluir.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-			tableColumnExcluir.setCellFactory(param -> new TableCell<Venda, Venda>() {
-				private final Button button = buttons.createIconButton(Remove_Solid,20);
+		});
 
-				@Override
-				protected void updateItem(Venda obj, boolean empty) {
-					super.updateItem(obj, empty);
-					if (obj == null) {
-						setGraphic(null);
-						return;
-					}
-					setGraphic(button);
-					button.setOnAction(
-							event -> {
-								onBtExcluir(event, obj);
-							});
-					
+	}
+	
+	/**
+	 *Função para inicializar botões excluir para cada venda da tabela
+	 */
+	private void initExcluirButtons() {
+		tableColumnExcluir.setStyle("-fx-alignment: CENTER");
+		tableColumnExcluir.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnExcluir.setCellFactory(param -> new TableCell<Venda, Venda>() {
+			private final Button button = buttons.createIconButton(Remove_Solid, 20);
+
+			@Override
+			protected void updateItem(Venda obj, boolean empty) {
+				super.updateItem(obj, empty);
+				if (obj == null) {
+					setGraphic(null);
+					return;
 				}
-				
-			});
-			
-		}
-		
+				setGraphic(button);
+				button.setOnAction(event -> {
+					onBtExcluir(event, obj);
+				});
+
+			}
+
+		});
+
+	}
+	
+	/**
+	 * Função para o botão relatórios
+	 * @param event Evento
+	 * @throws IOException Erro ao abrir a tela
+	 */
 	public void obBtRelatorios(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/relatorioVendaView.fxml"));
-		Pane pane = loader.load();	
-		pane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm()); 
-		Stage dialogStage = new Stage();			
+		Pane pane = loader.load();
+		pane.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+		Stage dialogStage = new Stage();
 		dialogStage.setScene(new Scene(pane));
-		dialogStage.setResizable(false);	
+		dialogStage.setResizable(false);
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.showAndWait();
 	}

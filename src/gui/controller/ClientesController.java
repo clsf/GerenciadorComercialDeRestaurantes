@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -36,10 +46,12 @@ import model.entities.Cliente;
 import model.gerenciadores.GerenciadorClientes;
 import model.utils.Alerts;
 import model.utils.buttons;
-
+/**
+ * Controlador da tela principal de clientes
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class ClientesController implements Initializable {
-	
-
 	
 	@FXML
 	private Button voltar;
@@ -82,13 +94,17 @@ public class ClientesController implements Initializable {
 	@FXML
 	private TableColumn<Cliente,Cliente> tableColumnExcluir;
 	
+	//Caminho para os ícones de editar e remover
 	public final String PEN_SOLID = "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" ;
 	public final String Remove_Solid = "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z";
+	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 
-
+	/**
+	 * Metódo para inicializar a tela principal de clientes
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initalizeNode();
@@ -99,18 +115,20 @@ public class ClientesController implements Initializable {
 		radioNome.setSelected(false);
 		
 	}
-	
+	/**
+	 * Metódo para par alterar o radio
+	 */
 	public void onRadioSelectedCodigo() {
 		if(radioCodigo.isSelected()) {
 			radioNome.setSelected(false);
-			
-
 		}else {
 			radioNome.setSelected(true);
-			
-			
 		}
 	}
+	
+	/**
+	 * Metódo para par alterar o radio
+	 */
 	
 	public void onRadioSelectedCNome() {	
 		if(radioNome.isSelected()) {
@@ -122,7 +140,9 @@ public class ClientesController implements Initializable {
 			
 		}
 	}
-	
+	/**
+	 * Metódo para buscar Cliente através do código ou nome
+	 */
 	public void onBtBuscar() {
 		List<Cliente> list = new ArrayList<>();
 		if(radioCodigo.isSelected()) {
@@ -151,7 +171,9 @@ public class ClientesController implements Initializable {
 			}
 		}
 	}
-	
+	/**
+	 * Metódo para atualizar a table view de Clientes a com todos os  clientes no gerenciador
+	 */
 	
 	public void updateData() {	
 		tableViewCliente.refresh();
@@ -161,7 +183,10 @@ public class ClientesController implements Initializable {
 		tableViewCliente.setItems(obsList);	
 		
 	}
-	
+	/**
+	 * Metódo para atualizar a table view de Cliente a partir de uma lista de Clientes especifica
+	 * @param cliente
+	 */
 	public void updateData(List<Cliente> cliente) {	
 		tableViewCliente.refresh();
 		List<Cliente> list = new ArrayList<>();
@@ -170,6 +195,11 @@ public class ClientesController implements Initializable {
 		tableViewCliente.setItems(obsList);	
 		
 	}
+	
+	/**
+	 * Metódo para chamar a tela de adicionar Clientes
+	 * @throws IOException Caso não consiga abrir a tela
+	 */
 	
 	 public void onBtAdicionarAction() throws IOException {
 		 	ClientesFormController.setCliente(null);
@@ -184,13 +214,22 @@ public class ClientesController implements Initializable {
 			
 			updateData();
 	 }
-	 
+	 /**
+	  * Função para inicializar as tabelas, ou os nós da tabela
+	  */
 	public void initalizeNode() {
 			tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
 			tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 			tableColumnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 			tableColumnTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 	}
+	
+	/**
+	 * Função para chamar a tela de editar cliente
+	 * @param event Evento
+	 * @param cliente Cliente a ser editado
+	 * @throws IOException Erro ao abrir a tela
+	 */
 	
 	private void mudarTelaEditar(ActionEvent event,Cliente cliente) throws IOException {	
 	
@@ -208,7 +247,11 @@ public class ClientesController implements Initializable {
 		
 		
 	}
-	
+	/**
+	 * Função para o botão excluir cliente
+	 * @param event Evento
+	 * @param cliente Cliente a ser excluído
+	 */
 	private void onBtExcluir(ActionEvent event, Cliente cliente) {
 		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente excluir Cliente?");
 		
@@ -217,7 +260,9 @@ public class ClientesController implements Initializable {
 		}
 		updateData();
 	}
-	
+	/**
+	 * Função para inicializar os botões de editar
+	 */
 	private void initInfoButtons() {
 		tableColumnEDIT.setStyle("-fx-alignment: CENTER");
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
@@ -247,6 +292,9 @@ public class ClientesController implements Initializable {
 		
 	}
 	
+	/**
+	 *Função para inicializar botões excluir para cada Cliente na tabela
+	 */
 	private void initExcluirButtons() {
 		tableColumnExcluir.setStyle("-fx-alignment: CENTER");
 		tableColumnExcluir.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
@@ -271,6 +319,12 @@ public class ClientesController implements Initializable {
 		});
 		
 	}
+	/**
+	 * Metódo para colocar ícones como botões 
+	 * @param svgAbsolutePath Caminho para o ícone
+	 * @param size tamanho do ícone
+	 * @return Botão
+	 */
 	
 	  // Cria um botão com o ícone svg dentro
 	  public static Button createIconButton(String svgAbsolutePath, int size) {
@@ -298,6 +352,11 @@ public class ClientesController implements Initializable {
 	    button.setPrefHeight(size);
 	    return button;
 	  }
+	/**
+	 * Metódo acionado ao clicar no botão voltar, retorna a tela de Menu
+	 * @param event Evento
+ 	 * @throws IOException Erro ao abrir a tela
+	 */
 	
 		
 	public void onBtVoltar(ActionEvent event) throws IOException {

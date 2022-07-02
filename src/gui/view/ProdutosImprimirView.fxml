@@ -21,7 +21,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label fx:id="labelTitulo" contentDisplay="CENTER" layoutX="87.0" layoutY="29.0" text="Relatório de Estoque - " textAlignment="CENTER">
+      <Label fx:id="labelTitulo" contentDisplay="CENTER" layoutX="4.0" layoutY="25.0" prefHeight="35.0" prefWidth="648.0" text="Relatório de Estoque - ">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

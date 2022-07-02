@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 26/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package model.utils;
 
 import java.util.ArrayList;
@@ -29,7 +39,7 @@ public class Facade {
 	public static void initializeUsuarios() throws DomainException {
 		//Criação de usuários
 		Usuario u1 = new Gerente("claus","cometa","Cláudia Inês");
-		Usuario u2 = new Funcionario("SLC","Estrelas","Inês Cláudia");
+		Usuario u2 = new Funcionario("adm","1","Adm");
 		GerenciadorUsuarios.addOuEdit(u1);
 		GerenciadorUsuarios.addOuEdit(u2);
 	}

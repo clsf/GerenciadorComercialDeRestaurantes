@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -20,7 +30,11 @@ import javafx.stage.Stage;
 import model.entities.Fornecedor;
 import model.gerenciadores.GerenciadorProdutos;
 import model.utils.Relatorios;
-
+/**
+ * Controlador da view de função imprimir relatórios de fornecedores
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class FornecedoresImprimirController implements Initializable {
 	
 	private static List<Fornecedor> lista = new ArrayList<>();
@@ -53,6 +67,10 @@ public class FornecedoresImprimirController implements Initializable {
     
     @FXML
     private ObservableList<Fornecedor> obsList;
+    
+    /**
+     * Metódo para inicializar a view
+     */
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -69,14 +87,18 @@ public class FornecedoresImprimirController implements Initializable {
 		initalizeNode();
 		updateData();
 	}
-	
+	/**
+	 * Metódo para inicializar os nós da tabela
+	 */
 	public void initalizeNode() {
 		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("name"));
 		tableColumnCNPJ.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
 		tableColumnProdutos.setCellValueFactory(new PropertyValueFactory<>("produtos"));
 	}
-	
+	/**
+	 * Metódo para atualizar a table view dos fornecedores
+	 */
 	public void updateData() {	
 		tableViewFornecedores.refresh();	
 		obsList = FXCollections.observableArrayList(lista);
@@ -84,12 +106,19 @@ public class FornecedoresImprimirController implements Initializable {
 		
 	}
 
-	
+	/**
+	 * Metódo para voltar a página anterior
+	 * @param event Evento
+	 * @throws IOException Exceção
+	 */
 	public void onBtVoltar(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btVoltar.getScene().getWindow(); //Obtendo a janela atual
 	    stage.close(); //Fechando o Stage
 	}
-	
+	/**
+	 * Metódo para imprimir o relatório
+	 * @param event Evento
+	 */
 	public void onBtImprimir(ActionEvent event) {		
 		if(tipo.equals(1)) {
 			if(lista.size()!=0) {
@@ -100,17 +129,27 @@ public class FornecedoresImprimirController implements Initializable {
 		}
 	}
 	
-
+	/**
+	 * Metódo para alterar a lista  do controller
+	 * @param lista Lista de fornecedores a ser impresso 
+	 */
 	public static void setLista(List<Fornecedor> lista) {
 		FornecedoresImprimirController.lista = lista;
 	}
-
+	
+	/**
+	 * Metódo para altrar o tipo de relatório a ser impresso
+	 * @param tipo Inteiro que classifica o tipo de relatório que será impresso
+	 */
 
 
 	public static void setTipo(Integer tipo) {
 		FornecedoresImprimirController.tipo = tipo;
 	}
-
+	/**
+	 * Metódo para alterar o nome do Produto que será mostrado na impressão
+	 * @param nomeProduto Nome do produto
+	 */
 	public static void setNomeProduto(String nomeProduto) {
 		FornecedoresImprimirController.nomeProduto = nomeProduto;
 	}

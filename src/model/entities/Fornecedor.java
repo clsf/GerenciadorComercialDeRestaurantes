@@ -48,7 +48,7 @@ public class Fornecedor {
 	
 	/**
 	 * Construtor do objeto fornecedor para instanciar junto com o ID,
-	 * servirá para edição de usuários ja existentes
+	 * servirá para edição de fornecedores ja existentes
 	 * 
 	 * @param id Identidade do Fornecedor
 	 * @param cnpj CNPJ do Fornecedor
@@ -172,6 +172,10 @@ public class Fornecedor {
 		return info;
 		
 	}
+	/**
+	 * Metódo para pegar os nomes dos produtos fornecidos 
+	 * @return String contendo os nomes dos produtos fornecidos
+	 */
 	
 	public String getProdutos() {
 		String produtos = "";

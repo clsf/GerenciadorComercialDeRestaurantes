@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -37,7 +47,11 @@ import model.enums.CategoriaPrato;
 import model.gerenciadores.GerenciadorPratos;
 import model.utils.Alerts;
 import model.utils.buttons;
-
+/**
+ * Controller da view de Pratros
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class PratosController implements Initializable {
 
     @FXML
@@ -80,14 +94,17 @@ public class PratosController implements Initializable {
     private TableView<Prato> tableViewPrato;
     @FXML
     private ObservableList<Prato> obsList;
-    
+  //Caminho para os ícones de editar e remover
 	public final String PEN_SOLID = "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" ;
 	public final String Remove_Solid = "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z";
+	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
     
-
+	/**
+	 * Metódo para inicializar a view
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initalizeNode();
@@ -101,6 +118,9 @@ public class PratosController implements Initializable {
 		
 	}
 	
+	/**
+	 * Metódo para par alterar o radio
+	 */
 	
 	public void onRadioSelectedCodigo() {
 		if(radioCodigo.isSelected()) {
@@ -113,7 +133,9 @@ public class PratosController implements Initializable {
 			
 		}
 	}
-	
+	/**
+	 * Metódo para par alterar o radio
+	 */
 	public void onRadioSelectedCNome() {	
 		if(radioNome.isSelected()) {
 			radioCodigo.setSelected(false);	
@@ -124,7 +146,9 @@ public class PratosController implements Initializable {
 			
 		}
 	}
-	
+	/**
+	 * Metódo para buscar Prato através do código ou nome
+	 */
 	
 	public void onBtBuscar() {
 		List<Prato> list = new ArrayList<>();
@@ -155,7 +179,10 @@ public class PratosController implements Initializable {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 * Metódo para atualizar a table view de Pratos a com todos os  pratos no gerenciador
+	 */
 	public void updateData() {
 		tableViewPrato.refresh();
 		List<Prato> list = new ArrayList<>();
@@ -164,7 +191,9 @@ public class PratosController implements Initializable {
 		tableViewPrato.setItems(obsList);	
 		
 	}
-	
+	/**	
+	 * Metódo para atualizar a table view de Clientes a com todos os  clientes de uma lista específica
+	 */
 	public void updateData(List<Prato> prato) {	
 		tableViewPrato.refresh();
 		List<Prato> list = new ArrayList<>();
@@ -173,7 +202,10 @@ public class PratosController implements Initializable {
 		tableViewPrato.setItems(obsList);	
 		
 	}
-	
+	/**
+	 * Metódo para chamar a tela de adicionar Pratos
+	 * @throws IOException Caso não consiga abrir a tela
+	 */
 	 public void onBtAdicionarAction() throws IOException {
 		 	PratosFormController.setPrato(null);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/PratosFormView.fxml"));
@@ -187,14 +219,21 @@ public class PratosController implements Initializable {
 			
 			updateData();
 	 }
-	
+	 /**
+	  * Função para inicializar as tabelas, ou os nós da tabela
+	  */
 	public void initalizeNode() {
 			tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
 			tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 			tableColumnPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
 			tableColumnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
 		}
-    
+	/**
+	 * Função para chamar a tela de editar Pratos
+	 * @param event Evento
+	 * @param prato Prato a ser editado
+	 * @throws IOException Erro ao abrir a tela
+	 */
 	private void mudarTelaEditar(ActionEvent event,Prato prato) throws IOException {
 
 	  	PratosFormController.setPrato(prato);	
@@ -210,7 +249,11 @@ public class PratosController implements Initializable {
 		updateData();
 		
 	}
-	
+	/**
+	 * Função para o botão excluir prato
+	 * @param event Evento
+	 * @param prato Prato a ser excluído
+	 */
 	private void onBtExcluir(ActionEvent event, Prato prato) {
 		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente excluir usuário?");
 		
@@ -219,7 +262,11 @@ public class PratosController implements Initializable {
 		}
 		updateData();
 	}
-	
+	/**
+	 * Metódo para voltar a tela de menu
+	 * @param event Evento
+	 * @throws IOException Erro ao abrir a tela
+	 */
 	public void onBtVoltar(ActionEvent event) throws IOException {
 		  root = FXMLLoader.load(getClass().getResource("/gui/view/MenuView.fxml"));
 		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -230,6 +277,9 @@ public class PratosController implements Initializable {
 		  stage.show();
 	}
 	
+	/**
+	 * Função para inicializar os botões de editar
+	 */
 	private void initInfoButtons() {
 		tableColumnEDIT.setStyle("-fx-alignment: CENTER");
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
@@ -258,6 +308,9 @@ public class PratosController implements Initializable {
 		});
 		
 	}
+	/**
+	 *Função para inicializar botões excluir para cada Prato na tabela
+	 */
 	
 	private void initExcluirButtons() {
 		tableColumnExcluir.setStyle("-fx-alignment: CENTER");

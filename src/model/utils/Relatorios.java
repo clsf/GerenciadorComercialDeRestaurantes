@@ -264,7 +264,7 @@ public class Relatorios {
 			listagem += "\nCódigo: "
 					+ venda.getId() +
 					"\nData: "
-					+sdf1.format(venda.getData())+
+					+venda.getData()+
 					"\nPratos: "+ prt+
 					"\nPreco Total: "
 					+venda.precoTotal(GerenciadorPratos.getPrato())+
@@ -379,7 +379,7 @@ public class Relatorios {
 
 		for(Produto produto: produtos) {
 			listagem+= "\nCódigo:" + produto.getId() +"\nNome: " +produto.getNome() + 
-						"\nValidade: "+sdf1.format(produto.getValidade())+"\nQuantidade: "+produto.getQuantidade();
+						"\nValidade: "+produto.getValidade()+"\nQuantidade: "+produto.getQuantidade();
 		}
 		return listagem;
 	}

@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -46,7 +56,11 @@ import model.gerenciadores.GerenciadorProdutos;
 import model.gerenciadores.GerenciadorVendas;
 import model.utils.Alerts;
 import model.utils.Relatorios;
-
+/**
+ * Controller da view de formulário de venda
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class VendasFormController implements Initializable {
 	
 	private static Venda venda;
@@ -113,13 +127,15 @@ public class VendasFormController implements Initializable {
     @FXML
     private ObservableList<Prato> obsListPratoTable;
     
+    
+    /**
+     * Inicializar a view
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initializeCombos();
 		initExcluirButtons();
-		initalizeNode();
-		
-		
+		initalizeNode();		
 		
 		if(venda==null) {
 			textCodigo.setText(String.valueOf(Venda.getUltimoId()));
@@ -153,7 +169,9 @@ public class VendasFormController implements Initializable {
 		}
 		updateData();
 	}
-	
+	/**
+	 * Inicializar a combox
+	 */
 	public void initializeCombos() {
 		List<FormaDePagamento> pagamento = new ArrayList<>(EnumSet.allOf(FormaDePagamento.class));
 		obsListPagamento = FXCollections.observableArrayList(pagamento);
@@ -188,9 +206,13 @@ public class VendasFormController implements Initializable {
 		
 		
 	}
-	
+	/**
+	 * Metódo para excluir prato da venda
+	 * @param event Evento
+	 * @param prato prato a ser excluído
+	 */
 	private void onBtExcluir(ActionEvent event, Prato prato) {
-		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente excluir ingrediente?");
+		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente excluir prato?");
 		
 		if(opcao.get()==ButtonType.OK) {
 			Integer idPrato = prato.getId();
@@ -199,6 +221,11 @@ public class VendasFormController implements Initializable {
 		updateData();
 	}
 	
+	/**
+	 * Método do botão cancelar para fechar a view
+	 * @param event Evento 
+	 * @throws IOException Erro
+	 */
 	public void onBtCancelar(ActionEvent event) throws IOException {
 		
 		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Cancelar?");
@@ -209,7 +236,10 @@ public class VendasFormController implements Initializable {
 		}
 	    
 	}
-	
+	/**
+	 * Método para adicionar prato na venda
+	 * @param event
+	 */
 	public void onBtAdicionar(ActionEvent event) {
 		if(comboPratos.getSelectionModel().getSelectedItem()!=null) {
 			Prato prato = comboPratos.getSelectionModel().getSelectedItem();			
@@ -217,7 +247,12 @@ public class VendasFormController implements Initializable {
 		}
 		updateData();
 	}
-	
+	/**
+	 * Metódo para salvar a venda
+	 * @param event Evento 
+	 * @throws NumberFormatException Erro 
+	 * @throws ParseException Erro
+	 */
 	public void onBtSalvar(ActionEvent event) throws NumberFormatException, ParseException {
 		if(comboPagamento.getSelectionModel().getSelectedItem()!=null && comboClientes.getSelectionModel().getSelectedItem()!=null) {
 			StatusDaVenda status;
@@ -245,7 +280,10 @@ public class VendasFormController implements Initializable {
 			Alerts.showAlert("ERRO!", "Faltando informações!","Não é possível salvar sem Forma de Pagamento ou Cliente!", AlertType.ERROR);
 		}
 	}
-	
+	/**
+	 * Método para o botão realizar a venda
+	 * @param event Evento
+	 */
 	public void onBtRealizarVenda(ActionEvent event) {
 		try {
 			Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente realizar a venda? Não poderá ser editada após a realização!");
@@ -269,7 +307,9 @@ public class VendasFormController implements Initializable {
 			Alerts.showAlert("ERRO!", "Faltando informações!",e.getMessage(), AlertType.ERROR);
 		}
 	}
-	
+	/**
+	 * Atualiza a table view de pratos
+	 */
 	
 	public void updateData() {
 		List<Prato> pratos = new ArrayList<>();
@@ -283,12 +323,16 @@ public class VendasFormController implements Initializable {
 		tableViewPratos.setItems(obsListPratoTable);
 		
 	}
-	
+	/**
+	 * Inicializa os nós da table view
+	 */
 	public void initalizeNode() {
 		tableColumnPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
 		tableColumnPrato.setCellValueFactory(new PropertyValueFactory<>("nome"));	
 	}
-	
+	/***
+	 * Inicializa os botões de excluir da tabela
+	 */
 	private void initExcluirButtons() {
 		tableColumnExcluir.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnExcluir.setCellFactory(param -> new TableCell<Prato, Prato>() {
@@ -312,12 +356,18 @@ public class VendasFormController implements Initializable {
 		});
 		
 	}
-
+	/**
+	 * Método para alterar venda do controller
+	 * @param object Venda a ser editada
+	 */
 	public static void setVenda(Venda object) {
 		venda = object; 
 		
 	}
-	
+	/**
+	 * Método para o botão emitir nota
+	 * @param event Evento
+	 */
 	public void onBtEmitirNota(ActionEvent event) {		
 		Relatorios.emitirNota(venda);
 	}

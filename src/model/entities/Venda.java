@@ -54,8 +54,8 @@ public class Venda {
 	}
 	
 	/**
-	 * Construtor do objeto usuário para instanciar junto com o ID,
-	 * servirá para edição de usuários ja existentes
+	 * Construtor do objeto venda para instanciar junto com o ID,
+	 * servirá para edição de vendas ja existentes
 	 * @param id Identidade do usuário
 	 * @param formaDePagamento Forma de Pagamento, podendo ser Débito, Pix, Crédito, etc...
 	 * @param data Data que foi realizada a venda
@@ -70,6 +70,16 @@ public class Venda {
 		this.itens = itens;
 	}
 	
+	/**
+	 * Construtor do objeto venda inserindo o cliente, permitindo instanciar junto com o ID, servirá para
+	 * edição de vendas já existentes
+	 * @param id 	ID da venda
+	 * @param formaDePagamento	Forma de Pagamento, podendo ser Débito, Pix, Crédito, etc...
+	 * @param data	Data que foi realizada a venda
+	 * @param status	Status da venda se está aberta ou fechada
+	 * @param itens	 Lista com ID's de pratos que fazem parte da venda
+	 * @param cliente Cliente da venda
+	 */
 	
 	public Venda(Integer id,  FormaDePagamento formaDePagamento, Date data, StatusDaVenda status,
 			List<Integer> itens, Cliente cliente) {
@@ -81,6 +91,14 @@ public class Venda {
 		this.status = status;
 	}
 	
+	/**
+	 * Construtor do objeto venda inserindo o cliente
+	 * @param formaDePagamento Forma de Pagamento, podendo ser Débito, Pix, Crédito, etc...
+	 * @param data	Data que foi realizada a venda
+	 * @param itens	 Lista com ID's de pratos que fazem parte da venda
+	 * @param status Status da venda se está aberta ou fechada
+	 * @param cliente Cliente da venda
+	 */
 
 	public Venda(FormaDePagamento formaDePagamento, Date data, List<Integer> itens, StatusDaVenda status,
 			Cliente cliente) {
@@ -112,17 +130,24 @@ public class Venda {
 	}
 	
 	/**
-	 * Metódo para pegar data da venda
-	 * @return Data - Data da venda
+	 * Metódo para pegar data da venda no formato dd/MM/aaaa
+	 * @return String com data da venda no formato dd/MM/aaaa
 	 */
 
 	public String getData() {
 		return sdf1.format(data);
 	}
-	
+	/**
+	 * Metódo para pegar a data da venda no formato MM/aaaa
+	 * @return String com data da venda no formato MM/aaaa
+	 */
 	public String getDataR() {
 		return sdf2.format(data);
 	}
+	/**
+	 * Metódo para pegar a data da venda no formato Date 
+	 * @return Data da venda no formato Date
+	 */
 	public Date getDataR2() {
 		return this.data;
 	}
@@ -158,7 +183,10 @@ public class Venda {
 	public void setItens(List<Integer> itens) {
 		this.itens=itens;
 	}
-	
+	/**
+	 * Adiciona itens na venda
+	 * @param item ID do item do cardápio para ser adicionado na venda
+	 */
 	public void addItens(Integer item) {
 		itens.add(item);
 	}
@@ -179,6 +207,11 @@ public class Venda {
 		
 		return precototal;
 	}
+	/**
+	 * Metódo para retornar o preço total da venda
+	 * @param pratos lista de pratos que compõem a venda
+	 * @return Double com o preço total da venda
+	 */
 	
 	public Double getPrecoTotal(List<Prato> pratos) {
 		Double precototal=(double) 0;
@@ -269,18 +302,33 @@ public class Venda {
 		return info;
 		
 	}
-
+	/**
+	 * Metódo para pegar o cliente da venda;
+	 * @return
+	 */
 	public Cliente getCliente() {
 		return cliente;
 	}
-
+	/**
+	 * Metódo para pegar o nome do Cliente da venda
+	 * @return String contendo o nome do cliente
+	 */
 	public String getNomeCliente() {
 		return cliente.getNome();
 	}
+	
+	/**
+	 * Metódo para alterar o cliente
+	 * @param cliente Cliente da venda
+	 */
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 	
+	/**
+	 * Metódo para remover prato da venda
+	 * @param id ID do prato que está na venda
+	 */
 	
 	public void removerPrato(Integer id) {
 		for(Integer prato: itens) {
@@ -290,9 +338,18 @@ public class Venda {
 		}
 	}
 	
+	/**
+	 * Metódo para pegar o preço total da venda
+	 * @return Double com o preço total da venda
+	 */
 	public Double getPreco() {
 		return precoTotal(GerenciadorPratos.getPrato());
 	}
+	
+	/**
+	 * Metódo para pegar o nome dos pratos que compoem a venda
+	 * @return String contendo os nomes dos pratos
+	 */
 	
 	public String getPratos() {
 		String pratos = "";

@@ -8,7 +8,6 @@ import model.entities.*;
 public class GerenciadorClientes {
 	private static  List<Cliente> listaDeClientes = new ArrayList<>();
 	
-	
 	private static void add(Cliente cliente) {		
 		listaDeClientes.add(cliente);	
 	}
@@ -17,33 +16,7 @@ public class GerenciadorClientes {
 		
 		listaDeClientes.set(listaDeClientes.indexOf(clienteEdit),alterarCliente);
 		
-		/*listaUsuarios.add(alterarUsuario);
-		listaUsuarios.remove(usuarioEdit);
-		System.out.println(usuarioEdit.getCargo());
-		System.out.println(alterarUsuario.getCargo());
-		//Se o login for diferente será trocado
-		if (usuarioEdit.getLogin() != alterarUsuario.getLogin()){
-			usuarioEdit.setLogin(alterarUsuario.getLogin());
-		}
-		//Se a senha for diferente será trocada
-		if(usuarioEdit.getSenha() != alterarUsuario.getSenha()) {
-			usuarioEdit.setSenha(alterarUsuario.getSenha());
-		}
-		//Se o nome for diferente será trocado
-		if(usuarioEdit.getNome() != alterarUsuario.getNome()) {
-			usuarioEdit.setNome(alterarUsuario.getNome());
-		}
-		if(alterarUsuario.getCargo()!=usuarioEdit.getCargo()) { 
-			
-			System.out.println("Entrou primeiro if");
-		
-			if(alterarUsuario.getCargo().equals("Funcionario")) {
-				System.out.println("Entrou segundo if");
-				usuarioEdit=(Funcionario) usuarioEdit;
-			}else {
-				usuarioEdit = (Gerente) usuarioEdit;
-			}
-		}*/
+
 	}
 	
 	public static void addOuEdit(Cliente cliente) {
@@ -106,7 +79,7 @@ public class GerenciadorClientes {
 		return listaDeClientes.size();
 	}
 	
-	public void limparLista() {
+	public static void limparLista() {
 		GerenciadorClientes.listaDeClientes.clear();
 	}
 	

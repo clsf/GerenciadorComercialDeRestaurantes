@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -34,7 +44,11 @@ import model.entities.Usuario;
 import model.gerenciadores.GerenciadorUsuarios;
 import model.utils.Alerts;
 import model.utils.buttons;
-
+/**
+ * Controller da view de Usuários
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class UsuariosController implements Initializable{
 	
 	@FXML
@@ -78,12 +92,18 @@ public class UsuariosController implements Initializable{
 	private TableColumn<Usuario,Usuario> tableColumnEDIT;
 	@FXML
 	private TableColumn<Usuario,Usuario> tableColumnExcluir;
-
+	
+	//Caminho para os ícones de editar e remover
 	public final String PEN_SOLID = "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" ;
 	public final String Remove_Solid = "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z";
+	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+
+	/**
+	 * Metódo para inicializar a tela principal de fornecedores
+	 */
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -97,18 +117,20 @@ public class UsuariosController implements Initializable{
 		
 	}
 	
+	/**
+	 * Metódo para par alterar o radio
+	 */
 	public void onRadioSelectedCodigo() {
 		if(radioCodigo.isSelected()) {
 			radioNome.setSelected(false);
-			
-
 		}else {
-			radioNome.setSelected(true);
-			
-			
+			radioNome.setSelected(true);		
 		}
 	}
 	
+	/**
+	 * Metódo para par alterar o radio
+	 */
 	public void onRadioSelectedCNome() {	
 		if(radioNome.isSelected()) {
 			radioCodigo.setSelected(false);	
@@ -120,6 +142,9 @@ public class UsuariosController implements Initializable{
 		}
 	}
 	
+	/**
+	 * Metódo para buscar Usuário através do código ou nome
+	 */
 	public void onBtBuscar() {
 		List<Usuario> list = new ArrayList<>();
 		if(radioCodigo.isSelected()) {
@@ -148,7 +173,10 @@ public class UsuariosController implements Initializable{
 			}
 		}
 	}
-		
+	
+	/**
+	 * Metódo para atualizar a table view de Usuário a com todos os  usuários do gerenciador
+	 */
 	public void updateData() {
 		tableViewUsuario.refresh();
 		List<Usuario> list = new ArrayList<>();
@@ -157,7 +185,9 @@ public class UsuariosController implements Initializable{
 		tableViewUsuario.setItems(obsList);	
 		
 	}
-	
+	/**
+	 * Metódo para atualizar a table view de Usuários a partir de uma lista de usuários especifica 
+	 */
 	public void updateData(List<Usuario> usuario) {	
 		tableViewUsuario.refresh();
 		List<Usuario> list = new ArrayList<>();
@@ -167,7 +197,10 @@ public class UsuariosController implements Initializable{
 		
 	}
 	
-
+	/**
+	 * Metódo para chamar a tela de adicionar Usuários
+	 * @throws IOException Caso não consiga abrir a tela
+	 */
 	 public void onBtAdicionarAction() throws IOException {
 		 	UsuariosFormController.setUsuario(null);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/UsuariosFormView.fxml"));
@@ -182,6 +215,10 @@ public class UsuariosController implements Initializable{
 			updateData();
 	 }
 	 
+	 /**
+	  * Função para inicializar as tabelas, ou os nós da tabela
+	  */
+	 
 	public void initalizeNode() {
 		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -189,6 +226,12 @@ public class UsuariosController implements Initializable{
 		tableColumnCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
 	}
 	
+	/**
+	 * Função para chamar a tela de editar usuário
+	 * @param event Evento 
+	 * @param usuario Usuário a ser editado 
+	 * @throws IOException Erro ao abrir a tela
+	 */
 	private void mudarTelaEditar(ActionEvent event,Usuario usuario) throws IOException {
 	
 		  	UsuariosFormController.setUsuario(usuario);	
@@ -205,7 +248,11 @@ public class UsuariosController implements Initializable{
 			
 			
 	}
-	
+	/**
+	 * Função para o botão excluir
+	 * @param event Evento 
+	 * @param usuario Usuário a ser excluído
+	 */
 	private void onBtExcluir(ActionEvent event, Usuario usuario) {
 		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente excluir usuário?");
 		
@@ -215,6 +262,11 @@ public class UsuariosController implements Initializable{
 		updateData();
 	}
 	
+	/**
+	 * Função para o botão voltar
+	 * @param event Evento
+	 * @throws IOException Erro ao abrir a tela
+	 */
 	public void onBtVoltar(ActionEvent event) throws IOException {
 		  root = FXMLLoader.load(getClass().getResource("/gui/view/MenuView.fxml"));
 		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -225,6 +277,9 @@ public class UsuariosController implements Initializable{
 		  stage.show();
 	}
 	
+	/**
+	 * Função para inicializar os botões de editar
+	 */
 	private void initInfoButtons() {
 		tableColumnEDIT.setStyle("-fx-alignment: CENTER");
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
@@ -252,7 +307,9 @@ public class UsuariosController implements Initializable{
 		});
 		
 	}
-	
+	/**
+	 *Função para inicializar botões excluir para cada usuário na tabela
+	 */
 	private void initExcluirButtons() {
 		tableColumnExcluir.setStyle("-fx-alignment: CENTER");
 		tableColumnExcluir.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));

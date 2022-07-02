@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -25,7 +35,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.entities.Produto;
 import model.utils.Relatorios;
-
+/**
+ * Controller da view de imprimir produtos
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class ProdutosImprimirController implements Initializable{
 	private static List<Produto> produtos = new ArrayList<>();
 	private static Integer tipo;
@@ -61,8 +75,9 @@ public class ProdutosImprimirController implements Initializable{
 	private Label labelTitulo;
 	
 	
-
-	
+    /**
+     * Método para inicializar a view
+     */	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		labelTotal.setText(String.valueOf(produtos.size()));
@@ -79,19 +94,25 @@ public class ProdutosImprimirController implements Initializable{
 			
 		}
 		else if(tipo==3) {
-			labelTitulo.setText("Relatório de produtos a vencer nos próximos 60 dias ");
+			labelTitulo.setText("Relatório de produtos a vencer");
 		}
 		initalizeNode();
 		updateData();
 		
 	}
-	
+	/**
+	 * Método para inicializar os nós da tabela
+	 */
 	public void initalizeNode() {
 		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		tableColumnValidade.setCellValueFactory(new PropertyValueFactory<>("validade"));
 		tableColumnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 	}
+	
+	/**
+	 * Método para atualizar a table view dos fornecedores
+	 */
 	
 	public void updateData() {	
 		tableViewProdutos.refresh();	
@@ -100,11 +121,20 @@ public class ProdutosImprimirController implements Initializable{
 		
 	}
 	
+	/**
+	 * Método para voltar a página anterior
+	 * @param event Evento
+	 * @throws IOException Exceção
+	 */
 	public void onBtVoltar(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btVoltar.getScene().getWindow(); //Obtendo a janela atual
 	    stage.close(); //Fechando o Stage
 	}
 	
+	/**
+	 * Método para imprimir o relatório
+	 * @param event Evento
+	 */
 	public void onBtImprimir(ActionEvent event) {		
 		if(tipo.equals(2)) {
 			if(produtos.size()!=0) {
@@ -114,12 +144,20 @@ public class ProdutosImprimirController implements Initializable{
 			Relatorios.gerarRelatorioProduto(produtos, tipo, null, produtos.size());
 		}
 	}
-
+	
+	/**
+	 * Método alterar a lista de produtos a ser impresso
+	 * @param produtos Lista de produtos
+	 */
 
 	public static void setProdutos(List<Produto> produtos) {
 		ProdutosImprimirController.produtos = produtos;
 	}
-
+	
+	/**
+	 * Método para alterar o tipo de impressão 
+	 * @param tipo Integer representando o tipo de impressão
+	 */
 	public static void setTipo(Integer tipo) {
 		ProdutosImprimirController.tipo = tipo;
 	}

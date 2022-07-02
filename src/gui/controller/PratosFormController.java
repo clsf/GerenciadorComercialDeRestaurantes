@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -36,7 +46,11 @@ import model.gerenciadores.GerenciadorPratos;
 import model.gerenciadores.GerenciadorProdutos;
 import model.utils.Alerts;
 import model.utils.Restringir;
-
+/**
+ * Controller para a view de formulário de pratos
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class PratosFormController implements Initializable{
 	
 	private List<Ingredientes> ingredientes = new ArrayList<>();
@@ -101,7 +115,9 @@ public class PratosFormController implements Initializable{
 	  @FXML
 	  private ObservableList<UnidadeDeMedida> obsListMedida;
 	  
-	  
+	/**
+	 * Metódo para inicializar as informações na view de Formulário de pratos  
+	 */
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -141,12 +157,16 @@ public class PratosFormController implements Initializable{
 	
 	
 	}
-	
+	/**
+	 * Metódo para restringir as entradas
+	 */
 	private void restringir() {
 		Restringir.setTextFieldDouble(textPreco);
 		Restringir.setTextFieldDouble(textQuantidade);
 	}
-	
+	/**
+	 * Função para ao clicar no botão salvar, salvar o Cliente no gerenciador
+	 */
     public void onBtAdicionar(ActionEvent event) {
     	
     	if(comboProdutos.getSelectionModel().getSelectedItem()!=null && comboMedida.getSelectionModel().getSelectedItem()!=null && textQuantidade.getText()!="") {    		
@@ -166,16 +186,17 @@ public class PratosFormController implements Initializable{
     		}
     		else {
     			Alerts.showAlert("ERRO!", "Ingrediente existente","Não é possível adicionar ingredientes iguais, por favor exclua um e adicione outro." , AlertType.ERROR);
-    		}
-    		
-    	
-    	
-    	
+    		}    	
     	updateData();    	
     	
     }
     }
     
+    /**
+     * Metódo para retirar o ingredite da lista de ingredientes
+     * @param event Evento
+     * @param ingrediente Ingrediente a ser removido
+     */
 	private void onBtExcluir(ActionEvent event, Ingredientes ingrediente) {
 		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente excluir ingrediente?");
 		
@@ -184,7 +205,10 @@ public class PratosFormController implements Initializable{
 		}
 		updateData();
 	}
-	
+	/**
+	 * Função para o botão cancelar, fechando a tela atual
+	 * @throws IOException Erro ao obter tela
+	 */
 	public void onBtCancelar(ActionEvent event) throws IOException {
 		
 		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Cancelar?");
@@ -195,7 +219,9 @@ public class PratosFormController implements Initializable{
 		}
 	    
 	}
-	
+	/**
+	 * Metódo do botão salvar para salvar o prato no gerenciador 
+	 */
 	public void onBtSalvar() {
 		if(comboCategoria.getSelectionModel().getSelectedItem()!=null) {
 			if(prato!=null) {
@@ -216,7 +242,9 @@ public class PratosFormController implements Initializable{
 		}
 	}
 	
-	
+	/**
+	 * Metódo para atualizar a table view de Ingredientes 
+	 */
 	public void updateData() {	
 		List<Ingredientes> ingredientesOFC = new ArrayList<>();
 		if(ingredientes!=null) {
@@ -229,13 +257,17 @@ public class PratosFormController implements Initializable{
 		tableViewIngredientes.setItems(obsListIngredientes);
 		
 	}
-	
+	/**
+	 * Metódo para inicializar as colunas da tabela
+	 */
 	public void initalizeNode() {
 		tableColumnProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
 		tableColumnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		tableColumnMedida.setCellValueFactory(new PropertyValueFactory<>("unidadeDeMeida"));
 	}
-	
+	/**
+	 * Metódo para inicializar botões de excluir da tabela
+	 */
 	private void initExcluirButtons() {
 		tableColumnExcluir.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnExcluir.setCellFactory(param -> new TableCell<Ingredientes, Ingredientes>() {
@@ -259,7 +291,10 @@ public class PratosFormController implements Initializable{
 		});
 		
 	}
-
+	/**
+	 * Metódo para alterar o prato do controller
+	 * @param prato Prato a ser editado
+	 */
 	public static void setPrato(Prato prato) {
 		PratosFormController.prato = prato;
 	}

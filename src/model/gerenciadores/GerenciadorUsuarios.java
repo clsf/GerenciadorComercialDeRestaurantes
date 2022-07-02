@@ -190,7 +190,7 @@ public class GerenciadorUsuarios {
 	/**
 	 * Metódo para limpar a lista de fornecedores, somente será utilizado nos Testes
 	 */
-	public void limparLista() {
+	public static void limparLista() {
 		GerenciadorUsuarios.listaUsuarios.clear();
 	}
 	

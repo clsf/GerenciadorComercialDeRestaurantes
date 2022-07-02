@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -31,7 +41,11 @@ import model.gerenciadores.GerenciadorFornecedores;
 import model.gerenciadores.GerenciadorProdutos;
 import model.utils.Alerts;
 import model.utils.Restringir;
-
+/**
+ * Controlador do formulário de edição e criação de fornecedores
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class FornecedoresFormController implements Initializable {
 	
 	private static Fornecedor fornecedor;
@@ -81,7 +95,11 @@ public class FornecedoresFormController implements Initializable {
     private ObservableList<Produto> obsList2;
     
     private List<Integer> idProdutos = new ArrayList<>();
-
+    
+    
+	/**
+	 * Metódo para inicializar o formulário de fornecedores
+	 */
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -125,9 +143,17 @@ public class FornecedoresFormController implements Initializable {
 			comboProdutos.setButtonCell(factory.call(null));
 	}
 	
+	/**
+	 * Metódo para restringir as caixas de entrada do usuário
+	 */
+	
 	public void restringir() {
 		Restringir.setTextFieldInteger(textCnpj);		
 	}
+	
+	/**
+	 * Função para ao clicar no botão adicionar, salva produto na lista de produtos fornecidos 
+	 */
     
     public void onBtAdicionar(ActionEvent event) {
     	
@@ -142,16 +168,16 @@ public class FornecedoresFormController implements Initializable {
     		if(!contem) {
     				idProdutos.add(produto.getId());
     		}
-    	}
-    	
-    	
-    	
-    	updateData();
-    	
-    	
-    	
+    	}    	
+    	updateData();    	
     }
     
+/**
+ * Função para o botõa excluir produto da lista de produtos fornecidos
+ * @param event Evento
+ * @param produto Produto a ser excluído da lista
+ */
+
     
 	private void onBtExcluir(ActionEvent event, Produto produto) {
 		Optional<ButtonType> opcao = Alerts.showConfirmation("Sim","Deseja realmente excluir produto?");
@@ -161,6 +187,11 @@ public class FornecedoresFormController implements Initializable {
 		}
 		updateData();
 	}
+	
+	/**
+	 * Função para o botão cancelar, fechando a tela atual
+	 * @throws IOException Erro ao obter tela
+	 */
 	
 	public void onBtCancelar(ActionEvent event) throws IOException {
 		
@@ -172,7 +203,9 @@ public class FornecedoresFormController implements Initializable {
 		}
 	    
 	}
-	
+	/**
+	 * Metódo para salvar o fornecedor no gerenciador ao clicar no botão salvar
+	 */
 	public void onBtSalvar() {
 		if(fornecedor!=null) {
 			Fornecedor f = new Fornecedor(Integer.valueOf(textCodigo.getText()), Integer.valueOf(textCnpj.getText()), textNome.getText(), textEndereco.getText(), idProdutos);
@@ -187,6 +220,9 @@ public class FornecedoresFormController implements Initializable {
 	    stage.close(); //Fechando o Stage
 		
 	}
+	/**
+	 * Metódo para atualizar a table view de produtos fornecidos
+	 */
 	
 	public void updateData() {			
 		List<Produto> produtos = new ArrayList<>();
@@ -199,12 +235,16 @@ public class FornecedoresFormController implements Initializable {
 		tableViewProdutos.setItems(obsList2);
 		
 	}
-	
+	/**
+	 * Metódo para inicializar os nós da tabela
+	 */
 	public void initalizeNode() {
 		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 	}
-	
+	/**
+	 * Metódo para inicializar os botões de excluir da tabela
+	 */
 	private void initExcluirButtons() {
 		tableColumnExcluir.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnExcluir.setCellFactory(param -> new TableCell<Produto, Produto>() {
@@ -228,7 +268,10 @@ public class FornecedoresFormController implements Initializable {
 		});
 		
 	}
-
+	/**
+	 * Metódo para alterar o fornecedor do controller
+	 * @param fornecedor2 Fornecedor a ser alterado
+	 */
 	public static void setFornecedor(Fornecedor fornecedor2) {
 		fornecedor = fornecedor2;
 		

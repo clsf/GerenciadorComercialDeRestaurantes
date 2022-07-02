@@ -168,7 +168,7 @@ public class GerenciadorPratos {
 	/**
 	 * Metódo para limpar a lista de fornecedores, somente será utilizado nos Testes
 	 */
-	public void limpaLista() {
+	public static void limpaLista() {
 		GerenciadorPratos.listaDePratos.clear();
 	}
 	

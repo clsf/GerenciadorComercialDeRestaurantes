@@ -131,7 +131,7 @@ public class GerenciadorProdutos {
 					"\nNome: "
 					+produto.getNome()+
 					"\nValidade: "
-					+sdf1.format(produto.getValidade())+
+					+produto.getValidade()+
 					"\nPreço: "
 					+produto.getPreco()+
 					" R$"

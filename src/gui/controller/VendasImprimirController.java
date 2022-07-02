@@ -1,5 +1,17 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
-
+/**
+ * Controlador da view de imprimir vendas
+ */
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -64,7 +76,10 @@ public class VendasImprimirController implements Initializable{
     
     @FXML
     private ObservableList<Venda> obsList;
-
+    
+    /**
+     * Método para inicializar a view
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		labelTotal.setText(String.valueOf(Relatorios.precoTotalVenda(vendas)));
@@ -85,7 +100,9 @@ public class VendasImprimirController implements Initializable{
 		
 		
 	}
-	
+	/**
+	 * Inicializa as colunas da table view
+	 */
 	public void initalizeNode() {
 		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnData.setCellValueFactory(new PropertyValueFactory<>("data"));
@@ -93,20 +110,29 @@ public class VendasImprimirController implements Initializable{
 		tableColumnTotal.setCellValueFactory(new PropertyValueFactory<>("preco"));
 		tableColumnPagamento.setCellValueFactory(new PropertyValueFactory<>("formaDePagamento"));
 	}
-	
+	/**
+	 * Atualiza os dados da table view
+	 */
 	public void updateData() {	
 		tableViewVendas.refresh();	
 		obsList = FXCollections.observableArrayList(vendas);
 		tableViewVendas.setItems(obsList);	
 		
 	}
-	
+	/**
+	 * Método para o botão voltar, retorna a tela anterior
+	 * @param event Evento 
+	 * @throws IOException Erro
+	 */
 	public void onBtVoltar(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btVoltar.getScene().getWindow(); //Obtendo a janela atual
 	    stage.close(); //Fechando o Stage
 	}
 	
-	
+	/**
+	 * Método para o botão imprimir, imprime o relatório
+	 * @param event Evento
+	 */
 	public void onBtImprimir(ActionEvent event) {		
 		if(tipo.equals(1)) {			
 				Relatorios.gerarRelatorioVenda(vendas, tipo, null, null,Relatorios.precoTotalVenda(vendas));
@@ -119,14 +145,26 @@ public class VendasImprimirController implements Initializable{
 		}
 	}
 
+	/**
+	 * Método para alterar a lista de vendas a ser impressa
+	 * @param vendas Vendas a serem impressas
+	 */
 	public static void setVendas(List<Venda> vendas) {
 		VendasImprimirController.vendas = vendas;
 	}
 
+	/**
+	 * Método para alterar o tipo de impressão 
+	 * @param tipo Integer que determina o tipo a ser imprimido
+	 */
 	public static void setTipo(Integer tipo) {
 		VendasImprimirController.tipo = tipo;
 	}
-
+	
+	/**
+	 * Método para alterar a categoria 
+	 * @param categoria Categoria do prato a ser impresso
+	 */
 	public static void setCategoria(CategoriaPrato categoria) {
 		VendasImprimirController.categoria = categoria;
 	}

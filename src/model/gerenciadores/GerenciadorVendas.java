@@ -54,18 +54,7 @@ public class GerenciadorVendas {
 	 */
 	private static void editar(Venda vendaEdit, Venda alterarVenda) {
 		listaDeVendas.set(listaDeVendas.indexOf(vendaEdit),alterarVenda);
-		/*	//Se a data estiver diferente será trocada
-			if(vendaEdit.getData() != alterarVenda.getData()) {
-				vendaEdit.setData(alterarVenda.getData());
-			}
-			//Se a forma de pagamento estiver diferente será trocada
-			if(vendaEdit.getFormaDePagamento() != alterarVenda.getFormaDePagamento()) {
-				vendaEdit.setFormaDePagamento(alterarVenda.getFormaDePagamento());
-			}
-			//Se a lista de itens for diferente será trocada
-			if(vendaEdit.getItens() != alterarVenda.getItens()) {
-				vendaEdit.setItens(alterarVenda.getItens());
-			}*/
+
 	}
 	/**
 	 * Metódo que será utilizado por outras classes para adicionar ou editar uma venda
@@ -143,7 +132,7 @@ public class GerenciadorVendas {
 			listagem += "\nCódigo: "
 					+ venda.getId() +
 					"\nData: "
-					+sdf1.format(venda.getData())+
+					+venda.getData()+
 					"\nPratos: "+ prt+
 					"\nPreco Total: "
 					+venda.precoTotal(pratos)+
@@ -159,14 +148,14 @@ public class GerenciadorVendas {
 	 * @return Integr - Quantidade de vendas cadastradas
 	 * 
 	 */
-	public Integer qtd() {
+	public static Integer qtd() {
 		return GerenciadorVendas.listaDeVendas.size();
 	}
 	
 	/**
 	 * Metódo para limpar a lista de vendas, somente será utilizado nos Testes
 	 */
-	public void limparLista() {
+	public static void limparLista() {
 		GerenciadorVendas.listaDeVendas.clear();
 	}
 	

@@ -23,7 +23,7 @@ public class Usuario {
 	private String login;			// Login do Usuário
 	private String senha;   		// Senha do Usuário
 	private String nome;			// Nome do Usuário
-	private String cargo;
+
 	
 	
 	
@@ -145,7 +145,10 @@ public class Usuario {
 		
 	}
 	
-
+	/**
+	 * Metódo para pegar o cargo do usuário
+	 * @return String informando cargo do usuário
+	 */
 	public String getCargo() {
 		return getClass().getSimpleName();
 	}

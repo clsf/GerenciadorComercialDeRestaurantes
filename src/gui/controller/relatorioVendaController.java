@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -31,7 +41,11 @@ import model.exceptions.DomainException;
 import model.gerenciadores.GerenciadorVendas;
 import model.utils.Alerts;
 import model.utils.Relatorios;
-
+/***
+ * Controller da view de relatório de Venda 
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class relatorioVendaController implements Initializable {
 	SimpleDateFormat sdf1 = new SimpleDateFormat("MM/yyyy");
 	
@@ -61,6 +75,9 @@ public class relatorioVendaController implements Initializable {
 	 private Parent root;
 	 
 	 
+	 /**
+	  * Método para inicializar a view
+	  */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		checkGeral.setSelected(true);
@@ -68,33 +85,50 @@ public class relatorioVendaController implements Initializable {
 		comboCategoria.setValue(CategoriaPrato.ENTRADA);
 		
 	}
-	
+	/**
+	 * Método para inicializar a comboBox
+	 */
 	public void initializeCombo() {
 		List<CategoriaPrato> categorias = new ArrayList<>(EnumSet.allOf(CategoriaPrato.class));
 		obsList = FXCollections.observableArrayList(categorias);
 		comboCategoria.setItems(obsList);
 	}
-	
+	/**
+	 * Método para alterar as ativações da checkBox
+	 * @param event Evento
+	 */
 	public void onCheckGeral(ActionEvent event) {
 		if(checkGeral.isSelected()) {
 			checkPrato.setSelected(false);
 			checkPeriodo.setSelected(false);
 		}			
 	}
-	
+	/**
+	 * Método para alterar as ativações da checkBox
+	 * @param event Evento
+	 */
 	public void onCheckPrato(ActionEvent event) {
 		if(checkPrato.isSelected()) {
 			checkGeral.setSelected(false);
 			checkPeriodo.setSelected(false);
 		}			
 	}
-	
+	/**
+	 * Método para alterar as ativações da checkBox
+	 * @param event Evento
+	 */
 	public void onCheckPeriodo(ActionEvent event) {
 		if(checkPeriodo.isSelected()) {
 			checkPrato.setSelected(false);
 			checkGeral.setSelected(false);
 		}			
 	}
+	
+	/**
+	 * Método do botão Gerar relatório
+	 * @param event Evento
+	 * @throws IOException Erro 
+	 */
 	
 	public void onBtGerar(ActionEvent event) throws IOException {
 		List<Venda> lista = new ArrayList<>();

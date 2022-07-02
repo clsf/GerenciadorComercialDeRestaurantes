@@ -13,9 +13,7 @@ package model.gerenciadores;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.entities.Cliente;
 import model.entities.Fornecedor;
-import model.entities.Venda;
 /**
  * Classe para criação do objeto Gerenciador de Fornecedores
  * @author Cláudia Inês Sales
@@ -51,22 +49,7 @@ public class GerenciadorFornecedores {
 	
 	private static void editar(Fornecedor fornecedorEdit,Fornecedor alterarFornecedor) {
 		listaFornecedores.set(listaFornecedores.indexOf(fornecedorEdit),alterarFornecedor);
-		/*//Troca o CNPJ do fornecedor se for diferente
-		if (fornecedorEdit.getCnpj() != alterarFornecedor.getCnpj()) {
-			fornecedorEdit.setCnpj(alterarFornecedor.getCnpj());
-		}
-		//Troca o Endereço do fornecedor se for diferente
-		if(fornecedorEdit.getEndereco() != alterarFornecedor.getEndereco()) {
-			fornecedorEdit.setEndereco(alterarFornecedor.getEndereco());
-		}
-		// Troca o nome do fornecedor se for diferente
-		if(fornecedorEdit.getName() != alterarFornecedor.getName()) {
-			fornecedorEdit.setName(alterarFornecedor.getName());
-		}
-		//Troca a lista de ID's de produtos fornecidos caso sejam diferentes
-		if(fornecedorEdit.getIdProdutosFornecidos() != alterarFornecedor.getIdProdutosFornecidos()) {
-			fornecedorEdit.setProdutosFornecidos(alterarFornecedor.getIdProdutosFornecidos());
-		}*/
+	
 	}
 	
 	/**
@@ -179,7 +162,7 @@ public class GerenciadorFornecedores {
 	 * Metódo para pegar a quantidade de fornecedores na lista
 	 * @return Integer - Quantidade de fornecedores na lista
 	 */
-	public Integer qtd() {
+	public static Integer qtd() {
 		return listaFornecedores.size();
 	}
 	

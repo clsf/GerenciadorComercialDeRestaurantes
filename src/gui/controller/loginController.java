@@ -1,3 +1,13 @@
+/*******************************************************************************
+Autor: Cláudia Inês Sales Freitas
+Componente Curricular: MI de Programação II
+Concluido em: 24/06/2022
+Declaro que este código foi elaborado por mim de forma individual e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+******************************************************************************************/
 package gui.controller;
 
 import java.io.IOException;
@@ -20,7 +30,11 @@ import model.exceptions.DomainException;
 import model.gerenciadores.GerenciadorUsuarios;
 import model.utils.Alerts;
 import model.utils.Facade;
-
+/**
+ * Controller da view de Login
+ * @author Cláudia Inês Sales Freitas
+ *
+ */
 public class loginController implements Initializable {
 
 	@FXML
@@ -35,6 +49,10 @@ public class loginController implements Initializable {
 	private Stage stage;
 	 private Scene scene;
 	 private Parent root;
+	 
+	 /**
+	  * Metódo para inicializar a view
+	  */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
@@ -44,7 +62,11 @@ public class loginController implements Initializable {
 		}
 		
 	}
-	
+	/**
+	 * Metódo para o botão entrar
+	 * @param event Evento 
+	 * @throws IOException Exceção 
+	 */
 	public void onBtEntrar(ActionEvent event) throws IOException {
 		
 		try {
