@@ -14,18 +14,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.zip.DataFormatException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.entities.Produto;
 import model.entities.Usuario;
+import model.exceptions.DomainException;
 import model.gerenciadores.GerenciadorProdutos;
 import model.utils.Alerts;
 import model.utils.Restringir;
@@ -78,7 +82,7 @@ public class ProdutosFormController implements Initializable {
 			textPreco.setText(String.format("%.2f",produto.getPreco()));
 
 		}		
-		
+		restringir();
 	}
 	/**
 	 * Metódo para restringir as caixas de entrada do usuário
@@ -94,18 +98,38 @@ public class ProdutosFormController implements Initializable {
 	
 	public void onBtSalvar() throws NumberFormatException, ParseException {
 		Locale.setDefault(Locale.US);
-		if(produto!=null) {			
-				Produto pEdit = new Produto(Integer.valueOf(textCodigo.getText()),textNome.getText(),Double.parseDouble(textPreco.getText()),sdf1.parse(textValidade.getText()),Double.parseDouble(textQuantidade.getText()));
-				GerenciadorProdutos.addOuEdit(pEdit);
+		boolean fechar = false;
+		if(produto!=null) {	
+				try {
+					Date data = sdf1.parse(textValidade.getText());
+					GerenciadorProdutos.cadastrarProduto(Integer.valueOf(textCodigo.getText()),textNome.getText(),Double.parseDouble(textPreco.getText()),data,Double.parseDouble(textQuantidade.getText()));
+					fechar = true;
+				}catch (DomainException e) {				
+					Alerts.showAlert("Erro!", null, e.getLocalizedMessage(), AlertType.ERROR);
+				}catch (ParseException e) {
+					Alerts.showAlert("Erro!", null, "Data inválida! Utilize o formato dd/mm/aaaa", AlertType.ERROR);
+				}
+				
 				
 		}
 		else {
-			Produto pEdit = new Produto(textNome.getText(),Double.parseDouble(textPreco.getText()),sdf1.parse(textValidade.getText()),Double.parseDouble(textQuantidade.getText()));
-			GerenciadorProdutos.addOuEdit(pEdit);
+			try {
+				Date data = sdf1.parse(textValidade.getText());
+				GerenciadorProdutos.cadastrarProduto(null,textNome.getText(),Double.parseDouble(textPreco.getText()),data,Double.parseDouble(textQuantidade.getText()));				
+				fechar=true;
+			}
+			catch (DomainException e) {				
+				Alerts.showAlert("Erro!", null, e.getLocalizedMessage(), AlertType.ERROR);
+			}catch (ParseException e) {
+				Alerts.showAlert("Erro!", null, "Data inválida! Utilize o formato dd/mm/aaaa", AlertType.ERROR);
+			}
+			
 		}
-		
-	    Stage stage = (Stage) salvar.getScene().getWindow(); //Obtendo a janela atual
-	    stage.close(); //Fechando o Stage
+		if(fechar) {
+		    Stage stage = (Stage) salvar.getScene().getWindow(); //Obtendo a janela atual
+		    stage.close(); //Fechando o Stage
+		}
+
 		
 	}
 	

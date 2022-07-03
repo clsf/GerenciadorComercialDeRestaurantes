@@ -173,16 +173,22 @@ public class GerenciadorProdutos {
 	 * @return Produto cadastrado
 	 * @throws DomainException Erro caso o produto já chegue vencido
 	 */
-	public static Produto cadastrarProduto(String nome,Double preco,Date validade,Double quantidade) throws DomainException {
+	public static void cadastrarProduto(Integer id,String nome,Double preco,Date validade,Double quantidade) throws DomainException {
 		
 		Date atual = new Date();
 		
 		if(atual.compareTo(validade)>0) {
 			throw new DomainException("A data de vencimento é antes da data atual, produto já vencido!");
 		}else {
-			Produto p1 = new Produto(nome,preco,validade,quantidade);
-			GerenciadorProdutos.addOuEdit(p1);
-			return p1;
+			if(id!=null) {
+				Produto p1 = new Produto(id,nome,preco,validade,quantidade);
+				GerenciadorProdutos.addOuEdit(p1);
+			}else {
+				Produto p1 = new Produto(nome,preco,validade,quantidade);
+				GerenciadorProdutos.addOuEdit(p1);
+			}
+			
+			
 		}
 	}
 

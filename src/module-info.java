@@ -8,15 +8,9 @@ apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de c
 de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
 do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
 ******************************************************************************************/
-/**
- * Módulos utilizados
- * @author Usuário
- *
- */
+
 module GerenciadorComercialDeRestaurantes {
-	/**
-	 * Módulos utilizados
-	 */
+
 	requires javafx.controls;
 	requires javafx.fxml;
 	requires javafx.base;
@@ -26,16 +20,11 @@ module GerenciadorComercialDeRestaurantes {
 	requires org.junit.jupiter.api;
 	requires junit;
 	requires org.junit.platform.suite.api;
-	/**
-	 * Módulos
-	 */
+
 	opens application to javafx.graphics, javafx.fxml, javafx.controls,itextpdf;
 	opens gui.controller to javafx.graphics, javafx.fxml, javafx.controls,itextpdf;
 	opens model.gerenciadorTeste to org.junit.jupiter.api,junit;
-	
-	/**
-	 * Exports
-	 */
+
 	exports gui.controller;	
 	
 	exports model.entities;

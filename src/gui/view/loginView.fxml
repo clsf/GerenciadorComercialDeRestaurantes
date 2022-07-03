@@ -11,8 +11,8 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.loginController">
    <children>
       <Button fx:id="btEntrar" layoutX="149.0" layoutY="239.0" mnemonicParsing="false" onAction="#onBtEntrar" prefHeight="25.0" prefWidth="72.0" styleClass="buttonEntrar" text="Entrar" />
-      <TextField fx:id="fieldLogin" layoutX="120.0" layoutY="105.0" prefHeight="25.0" prefWidth="181.0" promptText="Login" />
-      <TextField fx:id="fieldSenha" layoutX="120.0" layoutY="176.0" prefHeight="25.0" prefWidth="181.0" promptText="Senha" />
+      <TextField fx:id="fieldLogin" layoutX="120.0" layoutY="105.0" prefHeight="25.0" prefWidth="181.0" promptText="Login: adm" />
+      <TextField fx:id="fieldSenha" layoutX="120.0" layoutY="176.0" prefHeight="25.0" prefWidth="181.0" promptText="Senha: 1" />
       <Label layoutX="94.0" layoutY="40.0" text="Faça o seu login">
          <font>
             <Font name="System Bold" size="24.0" />

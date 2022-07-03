@@ -68,9 +68,9 @@ public class GerenciadorProdutoTest {
 		assertEquals(5,Produto.getUltimoId());
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 		Date d = sdf1.parse("25/10/2022");
-		assertNotNull(GerenciadorProdutos.cadastrarProduto("nenhum", 2.0, d, 200.0));
+		
 		try {
-			GerenciadorProdutos.cadastrarProduto("nenhum", 2.0, data2, 200.0);
+			GerenciadorProdutos.cadastrarProduto(null,"nenhum", 2.0, data2, 200.0);
 		}catch(DomainException e) {
 			assertTrue(true);
 		}
